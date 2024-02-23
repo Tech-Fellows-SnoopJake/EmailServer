@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
-import Sidebar from './components/Sidebar';
-import EmailList from './components/EmailList';
-import EmailDetail from './components/EmailDetail';
-import ComposeEmail from './components/ComposeEmail';
+import Sidebar from './components/Sidebar/Sidebar';
+import EmailList from './components/EmailList/EmailList';
+import EmailDetail from './components/EmailDetail/EmailDetail';
+import ComposeEmail from './components/ComposeEmail/ComposeEmail';
 import './styles/global.css';
 
 function App() {
