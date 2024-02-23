@@ -1,0 +1,23 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #274073; /* This is a guess based on the dark shades you provided */
+    color: #F2F2F2; /* Light color for contrast text */
+    padding: 0.5rem 1rem;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: inherit; /* Inherits from header color */
+  }
+  
+  .search {
+    /* Placeholder for search - style as needed */
+  }
+  
+  .user-profile {
+    /* Placeholder for user profile - style as needed */
+  }
