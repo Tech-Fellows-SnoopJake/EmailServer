@@ -10,7 +10,7 @@ ENV PYTHONUNBUFFERED 1
 
 # install dependencies
 RUN pip install --upgrade pip
-RUN pip install --upgrade setuptools
+RUN pip install --upgrade setuptools --user python
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
