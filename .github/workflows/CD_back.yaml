@@ -1,8 +1,8 @@
-name: CD_front Pipeline
+name: CD_back Pipeline
 
 on:
   workflow_run:
-    workflows: ['ci_front']
+    workflows: ['ci_back']
     branches: [main]
     types: [completed]
 
