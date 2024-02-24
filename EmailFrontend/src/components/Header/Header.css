@@ -36,24 +36,24 @@
   
   .dropdown {
     position: absolute;
-    top: 100%; /* Directly below the profile icon */
+    top: 100%; /* Position directly below the profile icon */
     right: 0;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    background-color: #fff; /* Assuming a white background for the dropdown */
+    border: 1px solid #ccc; /* Light grey border */
     border-radius: 4px;
-    width: 150px; /* Or whatever width you prefer */
-    z-index: 1000; /* Make sure it's above other elements */
+    width: 150px; /* Adjust width as needed */
+    z-index: 1000; /* Ensure it's above other content */
   }
   
   .dropdown ul {
     list-style: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
   }
   
   .dropdown li {
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid #ccc;
+    padding: 8px 12px;
+    color: #000; /* Black text for dropdown items */
     cursor: pointer;
   }
   
@@ -62,6 +62,5 @@
   }
   
   .dropdown li:hover {
-    background-color: #f2f2f2;
+    background-color: #f2f2f2; /* Light grey background on hover */
   }
-  

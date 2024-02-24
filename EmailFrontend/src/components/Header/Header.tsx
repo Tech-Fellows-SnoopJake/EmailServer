@@ -11,7 +11,7 @@ const Header: React.FC = () => {
     return (
       <header className="header">
         <div className="logo">
-          EmailBox
+          SnoopJake MailBox
         </div>
         <div className="search-bar">
           <input type="text" placeholder="Search in mail" className="search-input"/>
