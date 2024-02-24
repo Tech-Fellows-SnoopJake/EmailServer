@@ -1,1 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+.sidebar {
+    flex: 0 0 250px; 
+}
+  
+/* With  Routes  wrapped by a div with a class of .content-area */
+.content-area {
+    flex-grow: 1; /* Takes up the remaining space */
+    padding: 20px; /* Add padding for spacing */
+    overflow-y: auto; /* Allows scrolling if content overflows */
+}
+
+.main-container {
+    display: flex; /* This is essential for flex-grow to work */
+}
