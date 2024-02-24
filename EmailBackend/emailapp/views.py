@@ -81,12 +81,13 @@ class EmailAPI(APIView):
     
     def post(self, request):
         serializer = EmailSerializer(data=request.data)
-        sender_val = EmailAPI.user_exists(request.data.get('receiver').lower())
+        receiver_val = EmailAPI.user_exists(request.data.get('receiver').lower())
+        sender_val = EmailAPI.user_exists(request.data.get('sender').lower())
         #Validate that the email exists
-        if sender_val and serializer.is_valid(): 
+        if sender_val and receiver_val and serializer.is_valid(): 
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        elif sender_val == False:
+        elif sender_val == False or receiver_val == False:
             return Response({'error': 'This email dont exist!.'}, status=status.HTTP_400_BAD_REQUEST)        
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
