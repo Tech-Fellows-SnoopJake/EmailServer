@@ -9,7 +9,7 @@ class User(models.Model):
 
     # Convert username to lowercase before saving
     def save(self, *args, **kwargs):
-        self.username = self.username.lower() + '@test.com'
+        self.username = self.username.lower() #+ '@test.com'
         super().save(*args, **kwargs)
 
 
