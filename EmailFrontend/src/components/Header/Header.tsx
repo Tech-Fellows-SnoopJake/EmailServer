@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { Link } from 'react-router-dom'; 
 import './Header.css';
 
 const Header: React.FC = () => {
@@ -11,7 +11,7 @@ const Header: React.FC = () => {
     return (
       <header className="header">
         <div className="logo">
-          SnoopJake MailBox
+        <Link to="/inbox">SnoopJake MailBox</Link>
         </div>
         <div className="search-bar">
           <input type="text" placeholder="Search in mail" className="search-input"/>
