@@ -46,3 +46,23 @@
 .compose-email button:hover {
   background-color: #1a2d50; /* Darken color on hover */
 }
+
+
+.message {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.message.success {
+  color: #28a745;
+  background-color: #e6f9ec;
+  border: 1px solid #c3e6cb;
+}
+
+.message.error {
+  color: #dc3545;
+  background-color: #f9e6e7;
+  border: 1px solid #f5c6cb;
+}
