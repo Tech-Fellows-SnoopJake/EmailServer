@@ -11,13 +11,17 @@ function App() {
   return (
     <Router>
       <Header />
+      <div className="main-container">
       <Sidebar />
-      <Routes>
-        <Route path="/inbox" Component={EmailList} />
-        <Route path="/email/:id" Component={EmailDetail} />
-        <Route path="/compose" Component={ComposeEmail} />
-        <Route path="/" Component={EmailList} />
-      </Routes>
+      <div className="content-area">
+        <Routes>
+          <Route path="/inbox" element={<EmailList />} />
+          <Route path="/email/:id" element={<EmailDetail />} />
+          <Route path="/compose" element={<ComposeEmail />} />
+          <Route path="/" element={<EmailList />} />
+        </Routes>
+      </div>
+    </div>
     </Router>
   );
 }
