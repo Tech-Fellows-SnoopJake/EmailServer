@@ -23,8 +23,14 @@ class Email(models.Model):
     subject = models.CharField(max_length=50)
     body = models.TextField()
     folder = models.ForeignKey(Folder, on_delete=models.SET_NULL, null=True, blank=True,
-                               related_name='emails')  # // [Inbox] (mientras no sea modificado))
+                               related_name='emails')  # // [Inbox] (if is null!))
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    def save(self, *args, **kwargs):
+    # Normalize sender/receiver to lowercase before saving
+        self.sender = self.sender.lower()
+        self.receiver = self.receiver.lower()
+        super(Email, self).save(*args, **kwargs)
 
 
 def __str__(self):

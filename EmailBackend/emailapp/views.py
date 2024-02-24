@@ -65,23 +65,32 @@ class UserDetailsAPI(APIView):
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
 # Email C.R.U.D
 class EmailAPI(APIView):
+    #Method to validate that the email exists
+    @staticmethod
+    def user_exists(username):
+        username_without_domain = username.split('@')[0]
+        return User.objects.filter(username__iexact=username_without_domain).exists()
+
     @method_decorator(csrf_exempt)
     def get(self, request):
         emails = Email.objects.all()
         serializer = EmailSerializer(emails, many=True)
         return Response(serializer.data)
-
+    
     def post(self, request):
         serializer = EmailSerializer(data=request.data)
-        if serializer.is_valid():
+        sender_val = EmailAPI.user_exists(request.data.get('receiver').lower())
+        #Validate that the email exists
+        if sender_val and serializer.is_valid(): 
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
+        elif sender_val == False:
+            return Response({'error': 'This email dont exist!.'}, status=status.HTTP_400_BAD_REQUEST)        
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
 class EmailDetailsAPI(APIView):
     def get_object(self, pk):
         try:
