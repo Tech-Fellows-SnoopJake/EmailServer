@@ -4,9 +4,11 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, viewsets
+from rest_framework.permissions import AllowAny
 from .serializers import EmailSerializer, FolderSerializer, UserSerializer
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.contrib.auth.models import User
 from .models import Email, Folder, User
 
 
@@ -31,7 +33,6 @@ class UserAPI(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except IntegrityError:
             return Response({'error': 'This username is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
-
 
 class UserDetailsAPI(APIView):
     @csrf_exempt
@@ -64,6 +65,24 @@ class UserDetailsAPI(APIView):
         user = self.get_object(pk)
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+# Login without Tokens   
+class LoginAPIView(APIView):
+    
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        
+        # Validate that the username exists
+        user = User.objects.filter(username=username).first()
+        if not user:
+            return Response({'error': 'This username does not exist.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Validate the password
+        if user.password != password:
+            return Response({'error': 'Invalid password.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        return Response({'success': 'Login successful.'}, status=status.HTTP_200_OK)
 
 # Email C.R.U.D
 class EmailAPI(APIView):
@@ -117,7 +136,6 @@ class EmailDetailsAPI(APIView):
         email.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
 # List of emails received per user
 class ByEmail_APIView(APIView):
     @csrf_exempt
@@ -129,7 +147,6 @@ class ByEmail_APIView(APIView):
             return Response(serializer.data)
         except Email.DoesNotExist:
             raise Http404
-
 
 # List of emails sent by user
 class bySend_APIView(APIView):
@@ -143,7 +160,6 @@ class bySend_APIView(APIView):
         except Email.DoesNotExist:
             raise Http404
 
-
 #List of emails by folder and user
 #Comming soon!
 
@@ -151,3 +167,4 @@ class bySend_APIView(APIView):
 class Folders_APIView(viewsets.ModelViewSet):
     queryset = Folder.objects.all()
     serializer_class = FolderSerializer
+    
