@@ -137,7 +137,7 @@ class bySend_APIView(APIView):
     def get(self, request, format=None, *args, **kwargs):
         arg = kwargs
         try:
-            post = Email.objects.filter(sender=arg.get('email').lower())
+            post = Email.objects.filter(sender=(arg.get('email')+'@test.com').lower())
             serializer = EmailSerializer(post, many=True)
             return Response(serializer.data)
         except Email.DoesNotExist:
