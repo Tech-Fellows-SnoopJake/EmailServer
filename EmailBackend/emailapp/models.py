@@ -6,12 +6,10 @@ class User(models.Model):
     username = models.CharField(null=False, max_length=30, unique=True)
     password = models.CharField(null=False, max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
-
-    # Convert username to lowercase before saving
     def save(self, *args, **kwargs):
-        self.username = self.username.lower() #+ '@test.com'
-        super().save(*args, **kwargs)
-
+        # Normalize user name to lowercase before saving
+        self.username = self.username.lower()
+        super(User, self).save(*args, **kwargs)
 
 class Folder(models.Model):
     name = models.CharField(max_length=50)
