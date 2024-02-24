@@ -5,6 +5,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, viewsets
 from rest_framework.permissions import AllowAny
+
+from emailprototype.settings import FAKE_DOMAIN
 from .serializers import EmailSerializer, FolderSerializer, UserSerializer
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
@@ -90,8 +92,11 @@ class EmailAPI(APIView):
     @staticmethod
     def user_exists(username):
         username_without_domain = username.split('@')[0]
-        return User.objects.filter(username__iexact=username_without_domain).exists()
-
+        if FAKE_DOMAIN in username:
+            return User.objects.filter(username__iexact=username_without_domain).exists()
+        else:
+            return False
+       
     @method_decorator(csrf_exempt)
     def get(self, request):
         emails = Email.objects.all()
@@ -142,7 +147,7 @@ class ByEmail_APIView(APIView):
     def get(self, request, format=None, *args, **kwargs):
         arg = kwargs
         try:
-            post = Email.objects.filter(receiver=(arg.get('email')+'@test.com').lower())
+            post = Email.objects.filter(receiver=(arg.get('email')+FAKE_DOMAIN).lower())
             serializer = EmailSerializer(post, many=True)
             return Response(serializer.data)
         except Email.DoesNotExist:
@@ -154,7 +159,7 @@ class bySend_APIView(APIView):
     def get(self, request, format=None, *args, **kwargs):
         arg = kwargs
         try:
-            post = Email.objects.filter(sender=(arg.get('email')+'@test.com').lower())
+            post = Email.objects.filter(sender=(arg.get('email')+FAKE_DOMAIN).lower())
             serializer = EmailSerializer(post, many=True)
             return Response(serializer.data)
         except Email.DoesNotExist:
