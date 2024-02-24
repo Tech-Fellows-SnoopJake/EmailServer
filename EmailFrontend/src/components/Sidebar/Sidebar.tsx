@@ -1,11 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Assuming you're using react-router for navigation
+import { Link } from 'react-router-dom'; 
 import './Sidebar.css';
 
 const Sidebar: React.FC = () => {
   return (
     <aside className="sidebar">
       <nav>
+        <div className="compose-button-container">
+          <Link to="/compose" className="compose-button">Compose Email</Link>
+        </div>
         <ul>
           <li>
             <Link to="/inbox">Inbox</Link>
@@ -16,7 +19,7 @@ const Sidebar: React.FC = () => {
           <li>
             <Link to="/drafts">Drafts</Link>
           </li>
-          {/* we could more navigatrion stuff below*/}
+          {/* Additional navigation items can be added here */}
         </ul>
       </nav>
     </aside>

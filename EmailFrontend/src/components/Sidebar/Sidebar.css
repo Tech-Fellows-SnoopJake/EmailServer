@@ -20,5 +20,25 @@
     color: #333; /* Dark grey */
   }
   
-  /* Add more styles as needed */
+  .compose-button-container {
+    margin-bottom: 1rem; /* Spacing between button and the list */
+  }
+  
+  .compose-button {
+    display: block;
+    padding: 10px 15px;
+    margin: 0 0 20px 0;
+    background-color: #6e48aa; /*  mockup purple color */
+    color: white !important;
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none; /* Removes underline from link */
+    font-weight: bold; 
+  }
+  
+  .compose-button:hover {
+    background-color: #5A3AD9; /* A slightly lighter purple for hover effect */
+    color: #FFFFFF
+    
+  }
   
