@@ -1,0 +1,37 @@
+/* EmailList.css */
+.email-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .email-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc; /*  a light border to separate items */
+  }
+  
+  .email-sender {
+    flex: 1;
+  }
+  
+  .email-subject {
+    flex: 2;
+  }
+  
+  .email-date {
+    flex: 1;
+    text-align: right;
+  }
+  
+  .view-email {
+    margin-left: 20px;
+  }
+  
+  .email-list-empty {
+    color: #6c757d; 
+    text-align: center;
+    margin-top: 20px; 
+    font-style: italic;
+  }
