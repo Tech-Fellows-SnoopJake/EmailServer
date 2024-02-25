@@ -23,7 +23,7 @@ function getErrorMessage(status: number): string {
 
 
 const ComposeEmail: React.FC = () => {
-  const [to, setTo] = useState('');
+  const [receiver, setReceiver] = useState('');
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
   const [message, setMessage] = useState<{ text: string; type: 'error' | 'success' } | null>(null);
@@ -36,10 +36,11 @@ const ComposeEmail: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const apiUrl = 'https://temporal_api/send-email'; // 
-    const emailData = { to, subject, body };
+    const apiUrl = 'http://127.0.0.1:8000/emails/'; // 
+    const emailData = { receiver, subject, body, 'sender':'julian@snoopjake.com', 'user':3 };
 
     try {
+      console.log(emailData);
       const response = await axios.post(apiUrl, emailData, {
         headers: {
           'Content-Type': 'application/json',
@@ -51,7 +52,7 @@ const ComposeEmail: React.FC = () => {
       if (response.status === 200) {
         showMessage('Email sent successfully!', 'success');
         // Reset form fields
-        setTo('');
+        setReceiver('');
         setSubject('');
         setBody('');
       } else {
@@ -78,8 +79,8 @@ const ComposeEmail: React.FC = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="email"
-          value={to}
-          onChange={(e) => setTo(e.target.value)}
+          value={receiver}
+          onChange={(e) => setReceiver(e.target.value)}
           placeholder="To"
           required
         />

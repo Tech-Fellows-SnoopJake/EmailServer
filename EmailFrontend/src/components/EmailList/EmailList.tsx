@@ -20,10 +20,10 @@ const EmailList = () => {
 
       // for the demo, we have to get rid of this example email
       const senderEmail = "example@example.com";
-
+      const API_URL = "http://127.0.0.1:8000/";
       try {
         
-        const response = await axios.get(`/api/emails`, {
+        const response = await axios.get(`${API_URL}/emails`, {
           params: { senderEmail: senderEmail },
           /* this bit is for when we have login implemented {
             Authorization: `Bearer ${token}`, // Ensure you have a token variable available
