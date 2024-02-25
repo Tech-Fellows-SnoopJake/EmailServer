@@ -9,6 +9,7 @@ class TestAPI(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.user = User.objects.create(username='testuser', password='testpassword')
+        self.user = User.objects.create(username='testuser2', password='testpassword')
         self.folder = Folder.objects.create(name='Inbox', user=self.user)
 
     def test_create_user(self):
@@ -30,8 +31,8 @@ class TestAPI(TestCase):
     def test_create_email(self):
         data = {
             'user': self.user.pk,
-            'receiver': 'test@test.com',
-            'sender': 'test2@test.com',
+            'receiver': 'testuser@snoopjake.com',
+            'sender': 'testuser2@snoopjake.com',
             'subject': 'Test Subject',
             'body': 'This is a test email',
             'folder': self.folder.pk
