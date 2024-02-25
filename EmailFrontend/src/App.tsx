@@ -6,10 +6,16 @@ import EmailList from './components/EmailList/EmailList';
 import EmailDetail from './components/EmailDetail/EmailDetail';
 import ComposeEmail from './components/ComposeEmail/ComposeEmail';
 import './styles/global.css';
+import Login from './components/Login/Login';
 
 function App() {
   return (
-    <Router>
+    <Login />
+
+    
+  );
+}
+<Router>
       <Header />
       <div className="main-container">
       <Sidebar />
@@ -22,8 +28,5 @@ function App() {
         </Routes>
       </div>
     </div>
-    </Router>
-  );
-}
-
+  </Router>
 export default App;
