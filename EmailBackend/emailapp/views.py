@@ -91,9 +91,8 @@ class EmailAPI(APIView):
     #Method to validate that the email exists
     @staticmethod
     def user_exists(username):
-        username_without_domain = username.split('@')[0]
         if FAKE_DOMAIN in username:
-            return User.objects.filter(username__iexact=username_without_domain).exists()
+            return User.objects.filter(username__iexact=username).exists()
         else:
             return False
        

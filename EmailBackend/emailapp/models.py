@@ -1,5 +1,7 @@
 from django.db import models
 
+from emailprototype.settings import FAKE_DOMAIN
+
 
 # models here.
 class User(models.Model):
@@ -8,7 +10,7 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     def save(self, *args, **kwargs):
         # Normalize user name to lowercase before saving
-        self.username = self.username.lower()
+        self.username = self.username.lower() + FAKE_DOMAIN
         super(User, self).save(*args, **kwargs)
 
 class Folder(models.Model):
