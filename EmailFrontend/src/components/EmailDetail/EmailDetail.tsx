@@ -1,17 +1,21 @@
 import React from 'react';
-import './EmailDetail.css'
+import { useLocation } from 'react-router-dom';
+import './EmailDetail.css';
 
-const EmailDetail: React.FC = () => {
+const EmailDetail = () => {
+  const location = useLocation();
+  const email = location.state?.email; // Access the passed email data
+
+  if (!email) {
+    return <div className="email-detail-frame">Email not found.</div>;
+  }
+
   return (
-    <div className="email-detail">
-      <h2>Email Subject</h2>
-      <p><strong>From:</strong> sender@example.com</p>
-      <p><strong>To:</strong> recipient@example.com</p>
-      <p><strong>Date:</strong> Date and Time</p>
-      <hr />
-      <p>
-        Here is the email content. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
+    <div className="email-detail-frame">
+      <h2>{email.subject}</h2>
+      <p><strong>From:</strong> {email.sender}</p>
+      <p><strong>Date:</strong> {email.date}</p>
+      <div className="email-body">{email.body}</div>
     </div>
   );
 };

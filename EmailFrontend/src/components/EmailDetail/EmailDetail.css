@@ -1,15 +1,23 @@
 /* EmailDetail.css */
-.email-detail {
-  padding: 1rem;
+.email-detail-frame {
   border: 1px solid #ccc;
-  margin: 1rem;
-  border-radius: 4px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Soft shadow for depth */
+  max-width: 800px; /* change this style if the email size box is not big enough */
+  background-color: #fff; /* Ensure text contrast */
 }
 
-.email-detail h2 {
-  margin-top: 0;
+.email-body {
+  white-space: pre-wrap; /* For preserving line breaks and spaces if the email body is plain text */
+  margin-top: 20px;
 }
 
-.email-detail hr {
-  margin: 1rem 0;
+h2 {
+  margin-bottom: 10px;
+}
+
+p {
+  margin-bottom: 5px;
 }
