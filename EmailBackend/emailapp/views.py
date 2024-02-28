@@ -4,7 +4,8 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, viewsets
-from rest_framework.permissions import AllowAny
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import IsAuthenticated
 
 from emailprototype.settings import FAKE_DOMAIN
 from .serializers import EmailSerializer, FolderSerializer, UserSerializer
@@ -68,7 +69,7 @@ class UserDetailsAPI(APIView):
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-# Login without Tokens   
+# Login with Tokens   
 class LoginAPIView(APIView):
     
     def post(self, request):
@@ -84,10 +85,15 @@ class LoginAPIView(APIView):
         if user.password != password:
             return Response({'error': 'Invalid password.'}, status=status.HTTP_400_BAD_REQUEST)
         
-        return Response({'success': 'Login successful.'}, status=status.HTTP_200_OK)
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+        }, status=status.HTTP_200_OK)
 
 # Email C.R.U.D
 class EmailAPI(APIView):
+    #permission_classes = [IsAuthenticated] <--- Activate autenticate
     #Method to validate that the email exists
     @staticmethod
     def user_exists(username):
@@ -116,6 +122,7 @@ class EmailAPI(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 class EmailDetailsAPI(APIView):
+    #permission_classes = [IsAuthenticated] <--- Activate autenticate
     def get_object(self, pk):
         try:
             return Email.objects.get(pk=pk)
@@ -127,13 +134,13 @@ class EmailDetailsAPI(APIView):
         serializer = EmailSerializer(email)
         return Response(serializer.data)
 
-    # def put(self, request, pk):
-    #     email = self.get_object(pk)
-    #     serializer = EmailSerializer(email, data=request.data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def put(self, request, pk):
+        email = self.get_object(pk)
+        serializer = EmailSerializer(email, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
         email = self.get_object(pk)
@@ -142,11 +149,12 @@ class EmailDetailsAPI(APIView):
 
 # List of emails received per user
 class ByEmail_APIView(APIView):
+    #permission_classes = [IsAuthenticated] <--- Activate autenticate
     @csrf_exempt
     def get(self, request, format=None, *args, **kwargs):
         arg = kwargs
         try:
-            post = Email.objects.filter(receiver=(arg.get('email')+FAKE_DOMAIN).lower())
+            post = Email.objects.filter(receiver=(arg.get('email')).lower())
             serializer = EmailSerializer(post, many=True)
             return Response(serializer.data)
         except Email.DoesNotExist:
@@ -154,21 +162,20 @@ class ByEmail_APIView(APIView):
 
 # List of emails sent by user
 class bySend_APIView(APIView):
+    #permission_classes = [IsAuthenticated] <--- Activate autenticate
     @csrf_exempt
     def get(self, request, format=None, *args, **kwargs):
         arg = kwargs
         try:
-            post = Email.objects.filter(sender=(arg.get('email')+FAKE_DOMAIN).lower())
+            post = Email.objects.filter(sender=(arg.get('email')).lower())
             serializer = EmailSerializer(post, many=True)
             return Response(serializer.data)
         except Email.DoesNotExist:
             raise Http404
 
-#List of emails by folder and user
-#Comming soon!
-
 # Folders C.R.U.D  Crazy rigth?!.
 class Folders_APIView(viewsets.ModelViewSet):
+    #permission_classes = [IsAuthenticated] <--- Activate autenticate
     queryset = Folder.objects.all()
     serializer_class = FolderSerializer
     
