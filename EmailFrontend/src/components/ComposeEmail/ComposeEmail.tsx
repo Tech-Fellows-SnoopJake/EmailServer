@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './ComposeEmail.css';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; 
 import axios from 'axios';
@@ -70,17 +69,18 @@ const ComposeEmail: React.FC = () => {
   };
 
   return (
-    <div className="compose-email">
+    <div className="compose-email p-4 flex flex-col h-full">
       {message && (
-        <div className={`message ${message.type}`} onClick={() => setMessage(null)}>
-          {message.text}
+        <div className={`message p-4 mb-4 rounded-md cursor-pointer ${message.type === 'success' ? 'bg-green-100 border border-green-400 text-green-700' : 'bg-red-100 border border-red-400 text-red-700'}`} onClick={() => setMessage(null)}>
+  {message.text}
         </div>
       )}
-      <form onSubmit={handleSubmit}>
+      <form className="flex flex-col h-5/6" onSubmit={handleSubmit}>
         <input
           type="email"
           value={receiver}
           onChange={(e) => setReceiver(e.target.value)}
+          className="mb-4 px-2 h-10  border border-gray-300 rounded"
           placeholder="To"
           required
         />
@@ -88,12 +88,14 @@ const ComposeEmail: React.FC = () => {
           type="text"
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
+          className="mb-4 px-2 h-10 border border-gray-300 rounded"
           placeholder="Subject"
           required
         />
         <ReactQuill
           value={body}
           onChange={setBody}
+          className="flex-grow min-h-[200px] max-h-[445px] overflow-y-auto"
           placeholder="Body"
           modules={{
             toolbar: [
@@ -103,7 +105,7 @@ const ComposeEmail: React.FC = () => {
             ]
           }}
         />
-        <button type="submit">Send</button>
+        <button className="px-4 py-2 bg-[#274073] text-white rounded cursor-pointer hover:bg-[#1a2d50]" type="submit">Send</button>
       </form>
     </div>
   );

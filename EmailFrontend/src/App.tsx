@@ -6,7 +6,7 @@ import EmailList from './components/EmailList/EmailList';
 import EmailDetail from './components/EmailDetail/EmailDetail';
 import ComposeEmail from './components/ComposeEmail/ComposeEmail';
 import Login from './components/Login/Login';
-import './styles/global.css';
+import Register from './components/Register/Register';  
 import { Outlet } from 'react-router-dom';
 
 function App() {
@@ -21,6 +21,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="register" element={<Register />} />
         {/* Redirect from root to either Login or Inbox based on login status */}
         <Route path="/" element={isLoggedIn() ? <Navigate to="/inbox" /> : <Navigate to="/login" />} />
         {/* Layout route for authenticated users */}
@@ -28,6 +29,7 @@ function App() {
           <Route path="inbox" element={<EmailList />} />
           <Route path="email/:id" element={<EmailDetail />} />
           <Route path="compose" element={<ComposeEmail />} />
+          
         </Route>
       </Routes>
     </Router>
@@ -38,9 +40,9 @@ function App() {
 const Layout = () => (
   <>
     <Header />
-    <div className="main-container">
+    <div className="main-container flex ">
       <Sidebar />
-      <div className="content-area">
+      <div className="content-area grow p-5 overflow-y-auto ">
         {/* Outlet will render the nested route components */}
         <Outlet />
       </div>
