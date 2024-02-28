@@ -148,7 +148,7 @@ class EmailDetailsAPI(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 # List of emails received per user
-class ByEmail_APIView(APIView):
+class byEmail_APIView(APIView):
     permission_classes = [IsAuthenticated]
     @csrf_exempt
     def get(self, request, format=None, *args, **kwargs):
