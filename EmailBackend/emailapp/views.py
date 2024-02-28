@@ -93,7 +93,7 @@ class LoginAPIView(APIView):
 
 # Email C.R.U.D
 class EmailAPI(APIView):
-    #permission_classes = [IsAuthenticated] <--- Activate autenticate
+    permission_classes = [IsAuthenticated]
     #Method to validate that the email exists
     @staticmethod
     def user_exists(username):
@@ -122,7 +122,7 @@ class EmailAPI(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 class EmailDetailsAPI(APIView):
-    #permission_classes = [IsAuthenticated] <--- Activate autenticate
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Email.objects.get(pk=pk)
@@ -149,7 +149,7 @@ class EmailDetailsAPI(APIView):
 
 # List of emails received per user
 class ByEmail_APIView(APIView):
-    #permission_classes = [IsAuthenticated] <--- Activate autenticate
+    permission_classes = [IsAuthenticated]
     @csrf_exempt
     def get(self, request, format=None, *args, **kwargs):
         arg = kwargs
@@ -162,7 +162,7 @@ class ByEmail_APIView(APIView):
 
 # List of emails sent by user
 class bySend_APIView(APIView):
-    #permission_classes = [IsAuthenticated] <--- Activate autenticate
+    permission_classes = [IsAuthenticated]
     @csrf_exempt
     def get(self, request, format=None, *args, **kwargs):
         arg = kwargs
@@ -175,7 +175,7 @@ class bySend_APIView(APIView):
 
 # Folders C.R.U.D  Crazy rigth?!.
 class Folders_APIView(viewsets.ModelViewSet):
-    #permission_classes = [IsAuthenticated] <--- Activate autenticate
+    permission_classes = [IsAuthenticated]
     queryset = Folder.objects.all()
     serializer_class = FolderSerializer
     
