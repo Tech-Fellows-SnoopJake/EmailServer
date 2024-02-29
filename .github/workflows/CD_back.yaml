@@ -25,6 +25,7 @@ jobs:
     - name: Deploy to EC2
       run: |
         ssh -o StrictHostKeyChecking=no -l ubuntu ec2-34-227-46-194.compute-1.amazonaws.com <<EOF
+          sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:${{ env.COMMIT_SHA}}
           sudo docker stop $(docker ps -q --filter "name=emailserver" --filter "publish=8000")
           sudo docker rm $(docker ps -a -q --filter "name=emailserver" --filter "publish=8000")
           sudo docker run -d -p ${{ env.PORT }}:8000 ${{ env.IMAGE_NAME}}:${{ env.COMMIT_SHA}}
