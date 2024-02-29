@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunksnoop_jake_front_end_docs=self.webpackChunksnoop_jake_front_end_docs||[]).push([[5330],{8134:o=>{o.exports=JSON.parse('{"permalink":"/EmailFrontend/SnoopJakeFrontEndDocs/blog/tags/facebook","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
