@@ -12,7 +12,12 @@ ENV PYTHONUNBUFFERED 1
 RUN pip install --upgrade pip
 RUN pip install --upgrade setuptools
 COPY ./requirements.txt .
+COPY ./.env .
 RUN pip install -r requirements.txt
 
 # copy project
 COPY . .
+
+EXPOSE 8000
+
+CMD [ "python", "manage.py", "runserver"]
