@@ -9,6 +9,7 @@ on:
 env:
   PORT: 8000
   COMMIT_SHA: ${{ github.sha }}
+  SHORT_SHA=$(git rev-parse --short $GITHUB_SHA)
   IMAGE_NAME: emailserver
 jobs:
   deploy:
@@ -22,11 +23,21 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
+    - name: Obtener short SHA
+      uses: actions/github-script@v5
+      id: obtener-sha
+      with:
+            script: |
+              const { context } = require('@actions/github');
+              const shortSHA = context.sha.substring(0, 7);
+              console.log(shortSHA);
+              console.log(`::set-env name=SHORT_SHA::${shortSHA}`);
+
     - name: Deploy to EC2
       run: |
         ssh -o StrictHostKeyChecking=no -l ubuntu ec2-34-227-46-194.compute-1.amazonaws.com <<EOF
           sudo docker login ghcr.io -u ${{ secrets.REPO_ACTOR }} -p ${{ secrets.REPO_TOKEN }}
-          sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:${{ env.COMMIT_SHA}}
+          sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:${{ env.SHORT_SHA}}
 
-          sudo docker run -d -p ${{ env.PORT }}:8000 ${{ env.IMAGE_NAME}}:${{ env.COMMIT_SHA}}
+          sudo docker run -d -p ${{ env.PORT }}:8000 ${{ env.IMAGE_NAME}}:${{ env.SHORT_SHA}}
         EOF
