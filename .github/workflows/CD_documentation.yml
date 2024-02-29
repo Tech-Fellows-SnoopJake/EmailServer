@@ -5,6 +5,10 @@ on:
     branches:
       - main 
       - jfra_frontend_branch
+      
+permissions:
+    contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest  
