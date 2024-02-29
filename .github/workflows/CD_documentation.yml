@@ -9,6 +9,11 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest  
 
+    defaults:
+        run:
+          working-directory: ./EmailFrontend/SnoopJakeFrontEndDocs/
+
+
     steps:
       - uses: actions/checkout@v2  # Checks out your repository under $GITHUB_WORKSPACE, so the job can access it.
 
@@ -20,7 +25,6 @@ jobs:
 
       - name: Install Dependencies
         run: npm install  # Install the project dependencies.
-        working-directory: EmailFrontend/SnoopJakeFrontEndDocs/
 
       - name: Build Docusaurus Site
         run: npm run build  # Builds the Docusaurus site, outputs to the build directory.
