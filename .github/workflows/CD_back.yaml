@@ -23,20 +23,27 @@ jobs:
         ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
     - name: Obtener short SHA
+      id: short_sha
       uses: actions/github-script@v5
-      id: obtener-sha
       with:
-            script: |
-              const { context } = require('@actions/github');
-              const shortSHA = context.sha.substring(0, 7);
-              console.log(shortSHA);
-              console.log(`::set-env name=SHORT_SHA::${shortSHA}`);
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const { context, github } = require('@actions/github');
+          const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
+          const { data: commits } = await octokit.repos.listCommits({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            per_page: 1
+          });
+          const shortSHA = commits[0].sha.substring(0, 7);
+          console.log(shortSHA);
+          return shortSHA;
 
     - name: Deploy to EC2
       run: |
         ssh -o StrictHostKeyChecking=no -l ubuntu ec2-34-227-46-194.compute-1.amazonaws.com <<EOF
           sudo docker login ghcr.io -u ${{ secrets.REPO_ACTOR }} -p ${{ secrets.REPO_TOKEN }}
-          sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:${{ env.SHORT_SHA}}
+          sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:${{ steps.short_sha.outputs.result }}
 
-          sudo docker run -d -p ${{ env.PORT }}:8000 ${{ env.IMAGE_NAME}}:${{ env.SHORT_SHA}}
+          sudo docker run -d -p ${{ env.PORT }}:8000 ${{ env.IMAGE_NAME}}:${{ steps.short_sha.outputs.result }}
         EOF
