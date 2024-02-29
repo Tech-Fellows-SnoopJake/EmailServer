@@ -6,6 +6,10 @@ on:
     branches: [main]
     types: [completed]
 
+env:
+  PORT: 8000
+  COMMIT_SHA: ${{ github.sha }}
+  IMAGE_NAME: emailserver
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -21,5 +25,7 @@ jobs:
     - name: Deploy to EC2
       run: |
         ssh -o StrictHostKeyChecking=no -l ubuntu ec2-34-224-82-4.compute-1.amazonaws.com <<EOF
-          ls
+          docker stop $(docker ps -q --filter "emailserver" --filter "publish=8000")
+          docker rm $(docker ps -a -q --filter "emailserver" --filter "publish=8000")
+          docker run -d -p ${{ env.PORT }}:8000 ${{ env.IMAGE_NAME}}:${{ env.COMMIT_SHA}}
         EOF
