@@ -28,7 +28,6 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-          const { github } = require('@actions/github');
           const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
           const { data: commits } = await octokit.repos.listCommits({
             owner: github.context.repo.owner,
