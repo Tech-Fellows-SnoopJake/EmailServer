@@ -3,7 +3,7 @@ name: CD_front Pipeline
 on:
   workflow_run:
     workflows: ['ci_front']
-    branches: [main]
+    branches: [jfra_frontend_branch]
     types: [completed]
 
 env:
@@ -26,7 +26,7 @@ jobs:
     - name: Deploy to EC2
       run: |
         ssh -o StrictHostKeyChecking=no -l ubuntu ec2-34-224-82-4.compute-1.amazonaws.com <<EOF
-          docker stop $(docker ps -q --filter "emailserver" --filter "publish=5173")
-          docker rm $(docker ps -a -q --filter "emailserver" --filter "publish=5173")
+          docker stop $(docker ps -q --filter "name=emailserver" --filter "publish=5173")
+          docker rm $(docker ps -a -q --filter "name=emailserver" --filter "publish=5173")
           docker run -d -p ${{ env.PORT }}:5173 ${{ env.IMAGE_NAME}}:${{ env.COMMIT_SHA}}
         EOF
