@@ -28,11 +28,11 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-          const { context, github } = require('@actions/github');
+          const { github } = require('@actions/github');
           const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
           const { data: commits } = await octokit.repos.listCommits({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
+            owner: github.context.repo.owner,
+            repo: github.context.repo.repo,
             per_page: 1
           });
           const shortSHA = commits[0].sha.substring(0, 7);
