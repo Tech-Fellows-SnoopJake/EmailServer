@@ -9,7 +9,6 @@ on:
 env:
   PORT: 8000
   COMMIT_SHA: ${{ github.sha }}
-  SHORT_SHA=$(git rev-parse --short $GITHUB_SHA)
   IMAGE_NAME: emailserver
 jobs:
   deploy:
