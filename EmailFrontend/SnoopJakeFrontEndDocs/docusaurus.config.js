@@ -9,7 +9,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'SnoopJake FrontEnd Docs',
-  tagline: 'Dinosaurs are cool',
+  tagline: 'Dinosaurs are cool but not as much as SnoopJake',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -76,7 +76,7 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'docsSidebar',
             position: 'left',
-            label: 'DocumentationSideBar',
+            label: 'Jump to the Docs!',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
@@ -94,7 +94,7 @@ const config = {
             items: [
               {
                 label: 'Tutorial',
-                to: '/docs/intro',
+                to: 'https://docusaurus.io/docs',
               },
             ],
           },
