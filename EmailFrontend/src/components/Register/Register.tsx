@@ -8,7 +8,7 @@ const Register = () => {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(`Username: ${username}, Email: ${email}, Password: ${password}`);
+   
     try {
       // Realizar la solicitud al servidor para registrar al usuario
       const response = await fetch('http://localhost:8000/users/', {
@@ -25,18 +25,33 @@ const Register = () => {
         // Almacenar el token JWT en el localStorage o en las cookies si es necesario
         localStorage.setItem('token', data.token);
         // Redireccionar al usuario a la página de inicio después del registro
-        window.location.href = '/home';
+        if (process.env.NODE_ENV === 'production') {
+          window.location.href = '/home';
+        }
       } else {
         // Mostrar un mensaje de error si el registro falla
         console.error('Error de registro:', response.statusText);
       }
-    } catch (error:any) {
-      console.error('Error de registro:', error.message);
+    } catch (error) {
+      if (error instanceof Response && error.status === 404) {
+        console.error('Error de registro: Recurso no encontrado');
+      } 
+      if (error instanceof Response && error.status === 401) {
+        console.error('Error de registro: No autorizado');
+      }
+      if (error instanceof Response && error.status === 400) {
+        console.error('Error de registro: Solicitud incorrecta');
+      }
+      if (error instanceof Response && error.status === 500) {
+        console.error('Error de registro: Error interno del servidor');
+      }else {
+        console.error('Error de registro:');
+      }
     }
   };
 
   return (
-    <body className="register-bg h-screen flex justify-center items-center bg-gradient-to-r from-[#4b61a6] from-0% via-[#4b61a6] via-50% to-[#afb7cf] to-100%">
+    <div className="register-bg h-screen flex justify-center items-center bg-gradient-to-r from-[#4b61a6] from-0% via-[#4b61a6] via-50% to-[#afb7cf] to-100%">
       <div className="register-con p-4 rounded-[18px] w-[20%] bg-[#8091F2]">
         <h1 className="text-center mb-4 text-[#274073] text-2xl">Create an account</h1>
         <div className="line-top mb-6 border border-solid border-white"></div>
@@ -64,7 +79,7 @@ const Register = () => {
         </form>
         <div className="line-bottom mt-6 border border-solid border-white"></div>
       </div>
-    </body>
+    </div>
   );
 };
 

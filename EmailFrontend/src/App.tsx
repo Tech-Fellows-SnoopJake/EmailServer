@@ -8,6 +8,13 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';  
 import { Outlet } from 'react-router-dom';
 
+const handleLoginSuccess = () => {
+  // Esta función se llamará cuando el inicio de sesión sea exitoso
+  localStorage.setItem('isLoggedIn', 'true');
+
+  // Redireccionar al usuario a la bandeja de entrada
+  return <Navigate to="/inbox" />;
+};
 function App() {
   // Assuming you have a way to check if the user is logged in
   const isLoggedIn = () => {
@@ -19,7 +26,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
         <Route path="register" element={<Register />} />
         {/* Redirect from root to either Login or Inbox based on login status */}
         <Route path="/" element={isLoggedIn() ? <Navigate to="/inbox" /> : <Navigate to="/login" />} />
