@@ -11,6 +11,7 @@ env:
   PORT: 80
   COMMIT_SHA: ${{ github.sha }}
   IMAGE_NAME: emailserver
+  CCOMMIT: ${{ github.event.workflow_run.head_sha }}
 
 jobs:
   deploy:
@@ -26,7 +27,7 @@ jobs:
 
     - name: Set outputs
       id: vars
-      run: echo "sha_short=$(git rev-parse --short jfra_frontend_branch)" >> $GITHUB_OUTPUT
+      run: echo "sha_short=$(echo $CCOMMIT | cut -c1-7)" >> $GITHUB_OUTPUT
 
     - name: Deploy to EC2
       run: |
