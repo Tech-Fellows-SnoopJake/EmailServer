@@ -3,8 +3,13 @@ name: CD_back Pipeline
 on:
   workflow_run:
     workflows: ['ci_back']
-    branches: [main]
+    branches: [jfra_backend_branch]
     types: [completed]
+
+env:
+  PORT: 8000
+  COMMIT_SHA: ${{ github.sha }}
+  IMAGE_NAME: emailserver
 
 jobs:
   deploy:
@@ -18,8 +23,15 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
+    - name: Set outputs
+      id: vars
+      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
     - name: Deploy to EC2
       run: |
-        ssh -o StrictHostKeyChecking=no -l ubuntu ec2-34-224-82-4.compute-1.amazonaws.com <<EOF
-          ls
+        ssh -o StrictHostKeyChecking=no -l ubuntu ec2-34-227-46-194.compute-1.amazonaws.com <<EOF
+          sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
+          ./detener_contenedor_back.sh
+          ls -la
+          sudo docker run --env-file envVars.txt -d -p ${{ env.PORT }}:8000 ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
         EOF
