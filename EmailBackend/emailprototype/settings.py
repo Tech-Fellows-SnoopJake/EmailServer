@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['*', '34.227.46.194']
 # Application definition
 
 INSTALLED_APPS = [
+    'clearcache',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
