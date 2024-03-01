@@ -23,6 +23,10 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
+    - name: Set outputs
+      id: vars
+      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      
     - name: Deploy to EC2
       run: |
         ssh -o StrictHostKeyChecking=no -l ubuntu ec2-34-227-46-194.compute-1.amazonaws.com <<EOF
