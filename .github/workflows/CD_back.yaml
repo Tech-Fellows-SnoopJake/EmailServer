@@ -32,15 +32,7 @@ jobs:
 
     - name: Set outputs
       id: vars
-      run: echo "sha_short=$(git rev-parse --short $GITHUB_SHA)" >> $GITHUB_OUTPUT
-
-                  
-    - name: Get Latest Commit
-      id: get_commit
-      uses: nmbgeek/github-action-get-latest-commit@main
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        branch: jfra_backend_branch
+      run: echo "sha_short=$(git rev-parse --short $REF2)" >> $GITHUB_OUTPUT
 
     - name: Deploy to EC2
       run: |
