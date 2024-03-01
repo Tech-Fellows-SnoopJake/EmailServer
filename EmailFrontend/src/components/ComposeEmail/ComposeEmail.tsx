@@ -43,7 +43,8 @@ const ComposeEmail: React.FC = () => {
       const response = await axios.post(apiUrl, emailData, {
         headers: {
           'Content-Type': 'application/json',
-          // 'Authorization': 'Bearer YOUR_TOKEN_HERE', 
+          //localStorage.getItem("token", data.token);
+          'Authorization': 'Bearer' +localStorage.getItem("token") 
         },
       });
 
