@@ -48,5 +48,19 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.2.2",
     "vite": "^5.1.4"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": ["json", "lcov", "text", "clover", "cobertura"],
+    "reporters": [
+      "default",
+      [
+        "jest-junit",
+        {
+          "outputDirectory": "./coverage",
+          "outputName": "test-report.xml"
+        }
+      ]
+    ]
   }
 }
