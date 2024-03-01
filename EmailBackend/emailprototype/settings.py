@@ -27,14 +27,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ctulx*6&w$rh+t24m0n=twoe(n7wz=&3c2n*ay68b882o4cgx!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
-
+ALLOWED_HOSTS = ['*']
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS = [    
+    'clearcache',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,6 +44,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'emailapp'
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -104,10 +104,6 @@ DATABASES = {
     }
 }
 CORS_ALLOW_ALL_ORIGINS = True
-
-
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
