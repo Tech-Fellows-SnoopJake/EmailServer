@@ -10,6 +10,12 @@ env:
   PORT: 8000
   COMMIT_SHA: ${{ github.sha }}
   IMAGE_NAME: emailserver
+  SHA: ${{ GITHUB_SHA }}
+  REF1: ${{ github.ref }}
+  REF2: ${{ github.event.inputs.ref }}
+  REF3: ${{ github.event.inputs.branch }}
+  REF4: ${{ GITHUB_REF }}
+  COMMIT_HASH: ${{ github.event.inputs.commit_hash }}
 
 jobs:
   deploy:
