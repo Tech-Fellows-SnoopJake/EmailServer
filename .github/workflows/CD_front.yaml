@@ -1,6 +1,6 @@
 name: CD_front Pipeline
 
-
+# Information about the event that triggers the workflow
 on:
   workflow_run:
     workflows: ['ci_front']
