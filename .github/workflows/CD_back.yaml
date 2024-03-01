@@ -32,7 +32,7 @@ jobs:
 
     - name: Set outputs
       id: vars
-      run: echo "sha_short=$(git rev-parse --short refs/heads/$REF2)" >> $GITHUB_OUTPUT
+      run: echo "sha_short=$(echo $CCOMMIT | cut -c1-7)" >> $GITHUB_OUTPUT
 
 
     - name: Deploy to EC2
