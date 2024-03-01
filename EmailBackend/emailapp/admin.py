@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import User,Email
+from .models import User, Email
 
-# admin.
+# Register User and Email models in the Django admin panel.
 admin.site.register(User)
 admin.site.register(Email)
