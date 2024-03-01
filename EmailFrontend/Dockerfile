@@ -6,6 +6,7 @@ COPY . /app
 RUN npm install
 RUN npm run build
 
+# production environment
 FROM ubuntu
 RUN apt-get update
 RUN apt-get install nginx -y
