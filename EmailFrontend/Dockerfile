@@ -1,15 +1,13 @@
-FROM node:18-alpine3.17 as build
+FROM node:18.10-alpine3.15
 
 WORKDIR /app
-COPY . /app
 
-RUN npm install
-RUN npm run build
+COPY package.json package.json
 
-# production environment
-FROM ubuntu
-RUN apt-get update
-RUN apt-get install nginx -y
-COPY --from=build /app/dist /var/www/html/
+RUN npm i 
+
+COPY . .
+
 EXPOSE 80
-CMD ["nginx","-g","daemon off;"]
+
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "80"];
