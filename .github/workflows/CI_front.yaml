@@ -3,7 +3,7 @@ name: ci_front
 on:
   push:
     branches:
-      - jfra_frontend_branch
+      - main
   pull_request:
     types: [opened, synchronize, reopened] # For the pull request sonarcloud decorators
 
