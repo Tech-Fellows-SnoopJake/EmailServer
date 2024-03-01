@@ -12,6 +12,19 @@ export default {
     moduleNameMapper: {
         '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/src/__test__/__mocks__/fileMock.js',
     },
-    
+    reporters: [
+        "default",
+        [
+          "jest-junit",
+          {
+            outputDirectory: "./coverage",
+            outputName: "test-report.xml"
+          }
+        ]
+      ],
+    testMatch: [
+        "**/__tests__/**/*.[jt]s?(x)",
+        "**/?(*.)+(spec|test).[tj]s?(x)"
+    ],
  ///node_modules/react-quill/dist/.*.css
 }
