@@ -7,7 +7,7 @@
 <br>
 <br>
 
-**SnoopJake Email** is an email app made with React and Django. 
+**SnoopJake Email** is an email app made with React.ts + Vite and Django. 
 
 We developed it for the sake of training ourselves, and further develop the skills required to work as a team on the modern software development workflows. 
 _(Like CI/CD, QA workflows, AWS and project management with JIRA)_
