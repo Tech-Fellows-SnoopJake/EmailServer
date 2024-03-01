@@ -1,6 +1,6 @@
 name: CD_front Pipeline
 
-#Relevant information for the CD pipeline
+
 on:
   workflow_run:
     workflows: ['ci_front']
