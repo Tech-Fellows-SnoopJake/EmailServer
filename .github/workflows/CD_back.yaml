@@ -10,6 +10,7 @@ env:
   PORT: 8000
   COMMIT_SHA: ${{ github.sha }}
   IMAGE_NAME: emailserver
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -30,6 +31,7 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no -l ubuntu ec2-34-227-46-194.compute-1.amazonaws.com <<EOF
           sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
+          sudo docker stop $(docker ps -q --filter "publish=8000")
           ls -la
           sudo docker run --env-file envVars.txt -d -p ${{ env.PORT }}:8000 ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
         EOF
