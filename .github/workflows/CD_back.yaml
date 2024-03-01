@@ -12,7 +12,7 @@ env:
   COMMIT_SHA: ${{ github.sha }}
   IMAGE_NAME: emailserver
   REF1: ${{ github.ref }}
-  REF2: ${{ github.event.inputs.ref }}
+  REF2: ${{ github.event.workflow_run.head_branch }}
   REF3: ${{ github.event.inputs.branch }}
   COMMIT_HASH: ${{ github.event.inputs.commit_hash }}
   GITHUB_OUTPUT: ${{ github.event.inputs.github_output }}
