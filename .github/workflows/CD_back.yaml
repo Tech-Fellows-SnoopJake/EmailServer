@@ -25,7 +25,7 @@ jobs:
 
     - name: Set outputs
       id: vars
-      run: echo "sha_short=$(git rev-parse --short refs/heads/jfra_backend_branch)" >> $GITHUB_OUTPU
+      run: echo "sha_short=$(git rev-parse --short ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
 
     - name: Deploy to EC2
       run: |
