@@ -4,7 +4,7 @@ name: CD_front Pipeline
 on:
   workflow_run:
     workflows: ['ci_front']
-    branches: [main]
+    branches: [jfra_frontend_branch]
     types: [completed]
 
 env:
