@@ -24,6 +24,7 @@ const Sidebar: React.FC = () => {
 
       // Oculta el input después de crear la carpeta
       setShowInput(false);
+      setFolderName("");
     } catch (error) {
       console.error("Failed to create folder:", error);
       // Manejar errores de creación de carpeta
@@ -85,6 +86,7 @@ const Sidebar: React.FC = () => {
                   className="rounded-md border border-gray-300 p-2"
                 />
                 <Button onClick={handleCreateFolder}>Save</Button>
+                <Button onClick={() => setShowInput(false)}>Cancel</Button>
               </div>
             )}
           </li>

@@ -9,6 +9,7 @@ beforeAll(() => {
 afterEach(() => {
   fetchMock.resetMocks();
 });
+
 declare const global: any;
 
 
@@ -51,7 +52,7 @@ describe('Login component', () => {
     fireEvent.click(loginButton);
 
     await waitFor(() => {
-      expect(fetchMock).toHaveBeenCalledWith('/api/login', {
+      expect(fetchMock).toHaveBeenCalledWith('http://localhost:8000/login/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: 'test@example.com', password: 'password123' }),
