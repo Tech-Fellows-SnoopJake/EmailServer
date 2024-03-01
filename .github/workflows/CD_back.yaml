@@ -17,6 +17,7 @@ env:
   COMMIT_HASH: ${{ github.event.inputs.commit_hash }}
   GITHUB_OUTPUT: ${{ github.event.inputs.github_output }}
   CBRANCH: ${{ github.event.inputs.branch }}
+  CCOMMIT: ${{ github.event.workflow_run.head_sha }}
 
 jobs:
   deploy:
