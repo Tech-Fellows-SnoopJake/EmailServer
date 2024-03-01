@@ -25,13 +25,13 @@ jobs:
 
     - name: Set outputs
       id: vars
-      run: echo "sha_short=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_OUTPUT
+      run: echo "sha_short=$(git rev-parse --short jfra_backend_branch)" >> $GITHUB_OUTPUT
 
     - name: Deploy to EC2
       run: |
         ssh -o StrictHostKeyChecking=no -l ubuntu ec2-34-227-46-194.compute-1.amazonaws.com <<EOF
-          sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ sha_short }}
+          sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ echo "sha_short=$(git rev-parse --short jfra_backend_branch)" }}
           ./detener_contenedor_back.sh
           ls -la
-          sudo docker run --env-file envVars.txt -d -p ${{ env.PORT }}:8000 ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ sha_short }}
+          sudo docker run --env-file envVars.txt -d -p ${{ env.PORT }}:8000 ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ echo "sha_short=$(git rev-parse --short jfra_backend_branch)" }}
         EOF
