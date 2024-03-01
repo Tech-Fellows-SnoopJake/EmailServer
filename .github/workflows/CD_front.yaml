@@ -34,7 +34,7 @@ jobs:
           sudo echo sudo docker ps -q --filter "publish=80"
           sudo echo $(sudo docker ps -q --filter "publish=80")
 
-          sudo docker stop $(sudo docker ps -q --filter "publish=80")
+          sudo docker stop $(sudo docker ps -q --filter "publish=80/tcp")
           ls -la
           sudo docker run -d -p ${{ env.PORT }}:80 ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
         EOF
