@@ -1,6 +1,5 @@
 name: CD_back Pipeline
 
-#Comment
 on:
   workflow_run:
     workflows: ['ci_back']
