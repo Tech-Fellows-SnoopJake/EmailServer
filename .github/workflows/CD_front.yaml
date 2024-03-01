@@ -31,11 +31,11 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no -l ubuntu ec2-34-227-46-194.compute-1.amazonaws.com <<EOF
           sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
-          var1=$(sudo docker ps -q --filter "publish=80/tcp")
+          var1=$(sudo docker ps -aq --filter "publish=80/tcp")
           echo $var1
-          sudo echo $(sudo docker ps -q --filter "publish=80")
+          sudo echo $(sudo docker ps -aq --filter "publish=80")
 
-          sudo docker stop $(sudo docker ps -q --filter "publish=80/tcp")
+          sudo docker stop $(docker ps -aq --filter "publish=80/tcp")
           ls -la
           sudo docker run -d -p ${{ env.PORT }}:80 ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
         EOF
