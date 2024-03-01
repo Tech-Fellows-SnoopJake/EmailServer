@@ -6,6 +6,7 @@ on:
     branches: [jfra_backend_branch]
     types: [completed]
 
+
 env:
   PORT: 8000
   COMMIT_SHA: ${{ github.sha }}
@@ -14,6 +15,8 @@ env:
   REF2: ${{ github.event.inputs.ref }}
   REF3: ${{ github.event.inputs.branch }}
   COMMIT_HASH: ${{ github.event.inputs.commit_hash }}
+  GITHUB_OUTPUT: ${{ github.event.inputs.github_output }}
+  CBRANCH: ${{ github.event.inputs.branch }}
 
 jobs:
   deploy:
