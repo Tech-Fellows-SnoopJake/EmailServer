@@ -36,7 +36,7 @@ const Login = () => {
   };
 
   return (
-    <body className="login-bg  h-screen bg-gradient-to-r from-[#4b61a6] from-0% via-[#4b61a6] via-50% to-[#afb7cf] to-100%">
+    <div className="login-bg  h-screen bg-gradient-to-r from-[#4b61a6] from-0% via-[#4b61a6] via-50% to-[#afb7cf] to-100%">
       <div className="login-con absolute p-4 rounded-[18px] w-[20%] bg-[#8091F2] top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2">
         <h1 className='text-center mb-4 text-[#274073] text-2xl'>Sign In to EmailBox</h1>
         <div className="line-top mb-6 border border-solid border-white"></div>
@@ -58,7 +58,7 @@ const Login = () => {
         </form>
         <div className="line-bottom mt-6 border border-solid border-white"></div>
       </div>
-    </body>
+    </div>
   );
 };
 

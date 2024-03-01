@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; 
 import iconSvg from '../../assets/avatar.svg';
 
-interface HeaderProps {
-  onSearchTermChange: (term: string) => void;
-}
 const Header: React.FC = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   
