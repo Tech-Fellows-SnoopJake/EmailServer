@@ -1,10 +1,10 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen} from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { toHaveAttribute } from "@testing-library/jest-dom/matchers"; // Import the matcher
 import Sidebar from "../components/Sidebar/Sidebar";
 expect.extend({ toHaveAttribute });
 describe("Sidebar component", () => {
-    // ... (pruebas unitarias para Sidebar sin depender de la ruta)
+      // ... (pruebas unitarias para Sidebar sin depender de la ruta)
   
     test("should render links with correct URLs", () => {
       render(
@@ -20,4 +20,5 @@ describe("Sidebar component", () => {
       expect(screen.getByText("Drafts")).toHaveAttribute("href", "/drafts");
       // ... otras comprobaciones de enlaces y URLs
     });
+    
   });

@@ -11,7 +11,7 @@ interface Email {
 
 
 const EmailList = () => {
-  const [emails, setEmails] = useState<Email[]>([]);
+  const [emails, setEmails] = useState<Email[]>([]); 
 
 
   useEffect(() => {
@@ -29,7 +29,6 @@ const EmailList = () => {
           },
           */
         });
-
         // Defensive programming if we dont get an array (or a null type due to an API error)
         // we default to an empty array
         setEmails(Array.isArray(response.data) ? response.data : []); // response data should be array of emails
@@ -42,7 +41,6 @@ const EmailList = () => {
 
     fetchEmails();
   }, []); // Dependency array is empty, so this effect runs once when the component mounts
-
   return (
     <div className="email-list flex flex-col">
       {emails.length > 0 ? (

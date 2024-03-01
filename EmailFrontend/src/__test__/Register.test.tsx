@@ -46,7 +46,7 @@ describe("Register component", () => {
     fireEvent.click(registerButton);
 
     await waitFor(() => {
-      expect(fetchMock).toHaveBeenCalledWith("/api/login", {
+      expect(fetchMock).toHaveBeenCalledWith("http://localhost:8000/users/", {
         // Ajusta la URL esperada aquí
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -74,7 +74,7 @@ describe("Register component", () => {
     fireEvent.click(registerButton);
 
     await waitFor(() => {
-      expect(fetchMock).toHaveBeenCalledWith("/api/login", {
+      expect(fetchMock).toHaveBeenCalledWith("http://localhost:8000/users/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
