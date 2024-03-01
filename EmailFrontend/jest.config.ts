@@ -10,7 +10,7 @@ export default {
         '../../node_modules/react-quill/dist/'
     ],
     moduleNameMapper: {
-        '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/src/__test__/__mocks__/fileMock.js',
+        '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/src/__tests__/__mocks__/fileMock.js',
     },
     reporters: [
         "default",
