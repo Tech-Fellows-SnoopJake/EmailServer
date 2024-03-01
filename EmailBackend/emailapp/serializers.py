@@ -4,7 +4,7 @@ from .models import Email, Folder, User
 
 class UserSerializer(serializers.ModelSerializer):
     """
-    Serializer for the User model.
+    Serializer for the User model..
     """
     class Meta:
         model = User
