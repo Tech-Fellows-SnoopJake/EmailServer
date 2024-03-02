@@ -18,17 +18,11 @@ const EmailList = () => {
     const fetchEmails = async () => {
 
       // for the demo, we have to get rid of this example email
-      const senderEmail = "example@example.com";
-      const API_URL = "http://127.0.0.1:8000/";
+      const senderEmail = "julian@snoopjake.com";
+      const API_URL = "http://34.227.46.194:8000";
       try {
         
-        const response = await axios.get(`${API_URL}/emails`, {
-          params: { senderEmail: senderEmail },
-          /* this bit is for when we have login implemented {
-            Authorization: `Bearer ${token}`, // Ensure you have a token variable available
-          },
-          */
-        });
+        const response = await axios.get(`${API_URL}/sendlist/${senderEmail}/`);
         // Defensive programming if we dont get an array (or a null type due to an API error)
         // we default to an empty array
         setEmails(Array.isArray(response.data) ? response.data : []); // response data should be array of emails
