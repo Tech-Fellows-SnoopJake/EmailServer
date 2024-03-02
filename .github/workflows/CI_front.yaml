@@ -25,7 +25,19 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones  disabled for SonarCloud compatibility
-      
+          
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' # Specify the Node.js version you need
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./EmailFrontend
+
+      - name: Run tests
+        run: npm test
+        working-directory: ./EmailFrontend
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
