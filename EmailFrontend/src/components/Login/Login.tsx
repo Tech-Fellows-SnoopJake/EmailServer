@@ -36,7 +36,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
       if (response.ok) {
         const data = await response.json();
         // Almacenar el token JWT en el localStorage o en las cookies
-        localStorage.setItem("token", data.token);
+        localStorage.setItem("token", data.access);
         // Redireccionar al usuario a la página de inicio, por ejemplo
         onLoginSuccess();
       } else {
