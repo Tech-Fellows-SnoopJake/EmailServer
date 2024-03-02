@@ -110,22 +110,22 @@ class LoginAPIView(APIView):
             if not user:
                 # Create a new user if the username does not exist
                 user = User.objects.create(username=username.split('@')[0], password=password)  # You can add more fields here according to your user model
-                return Response({'user': {
+                return Response({
                     'id': user.id,
-                    'username': user.username,
+                    'username': user.username
                     # Add more user attributes here if needed
-                }}, status=status.HTTP_201_CREATED)
+                }, status=status.HTTP_201_CREATED)
             
             # Validate the password by comparing
             if user.password != password:
                 return Response({'error': 'Invalid password.'}, status=status.HTTP_400_BAD_REQUEST)
             
             # Successful authentication, return the user object
-            return Response({'user': {
+            return Response({
                 'id': user.id,
                 'username': user.username,
                 # Add more user attributes here if needed
-            }}, status=status.HTTP_200_OK)
+            }, status=status.HTTP_200_OK)
         
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
