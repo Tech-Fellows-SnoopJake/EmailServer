@@ -8,7 +8,7 @@ jest.mock('axios'); // Mock axios for controlled testing
 
 describe('EmailList', () => {
   it('renders empty list message when no emails are present', () => {
-    render(<EmailList />);
+    render(<EmailList typeEmail={''} />);
     const emptyListMessage = screen.queryByText(/This is your email list, but it's empty./i);
     expect(emptyListMessage).toBeInTheDocument(); // Si no se encuentra, será `null`
   });
@@ -21,7 +21,7 @@ describe('EmailList', () => {
   
     console.error = jest.fn(); // Mock console.error for testing purposes
   
-    const { getByText } = render(<EmailList />);
+    const { getByText } = render(<EmailList typeEmail={''} />);
   
     await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 0)); // Wait for async operations
