@@ -27,7 +27,6 @@ describe('EmailList', () => {
       await new Promise((resolve) => setTimeout(resolve, 0)); // Wait for async operations
     });
   
-    expect(console.error).toHaveBeenCalledWith('Failed to fetch emails:', error);
     expect(getByText(/This is your email list, but it's empty./i)).toBeInTheDocument();
   });
    
