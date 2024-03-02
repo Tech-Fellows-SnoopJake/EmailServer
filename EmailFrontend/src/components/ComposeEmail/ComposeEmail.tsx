@@ -44,7 +44,7 @@ const ComposeEmail: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
           //localStorage.getItem("token", data.token);
-          'Authorization': 'Bearer' +localStorage.getItem("token") 
+          'Authorization': 'Bearer ' +localStorage.getItem("token") 
         },
       });
 
