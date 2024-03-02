@@ -20,13 +20,16 @@ describe('Login component', () => {
   test('allows user to input email and password', () => {
     const { getByLabelText } = render(<Login onLoginSuccess={() => {}} />);
     const emailInput = getByLabelText('email') as HTMLInputElement;
+    const passwordInput = getByLabelText('password') as HTMLInputElement;
     
 
     act(() => {
       fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+      fireEvent.change(passwordInput, { target: { value: 'password123' } });
     });
 
     expect(emailInput.value).toBe('test@example.com');
+    expect(passwordInput.value).toBe('password123');
   });
 
   test('submits login form correctly', async () => {
@@ -43,8 +46,11 @@ describe('Login component', () => {
     );
     const emailInput = getByLabelText('email');
     const loginButton = getByText('Login');
+    const passwrordInput = getByLabelText('password');
+
 
     fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+    fireEvent.change(passwrordInput, { target: { value: 'password123' } });
     fireEvent.click(loginButton);
 
     await waitFor(() => {
@@ -62,9 +68,9 @@ test('handles login errors correctly', async () => {
   const { getByLabelText, getByText } = render(<Login onLoginSuccess={() => {}} />);
   const emailInput = getByLabelText('email');
   const loginButton = getByText('Login');
-  const passwrordInput = "password123";
+  const passwrordInput = getByLabelText('password');
   fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-  fireEvent.change(getByLabelText('password'), { target: { value: passwrordInput } });
+  fireEvent.change(passwrordInput, { target: { value: passwrordInput } });
   fireEvent.click(loginButton);
 });
 

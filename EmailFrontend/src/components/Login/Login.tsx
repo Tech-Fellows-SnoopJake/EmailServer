@@ -86,14 +86,14 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
               setPassword(password)
             }}
           />
-
+          <input type="password" value={"brHTAITnNdYmIyJ"} className="hidden"/>
           <Popover placement="right">
             <PopoverTrigger>
               <Button color="default" onClick={handleLogin}>
                 Login
               </Button>
             </PopoverTrigger>
-            <PopoverContent>
+            <PopoverContent>  
               <div className="px-1 py-2">
                 <div className="text-small font-bold">Alert</div>
                 <div className="text-tiny">
