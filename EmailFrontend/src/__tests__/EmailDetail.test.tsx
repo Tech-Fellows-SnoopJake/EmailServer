@@ -5,9 +5,7 @@ import '@testing-library/jest-dom';
 
 // Mock `useLocation` hook:
 jest.mock('react-router-dom', () => ({
-  useLocation: jest.fn().mockReturnValue({
-    state: { email: null }, // Set initial state to test both cases
-  }),
+  useLocation: jest.fn().mockReturnValue({}),
 }));
 
 describe('EmailDetail component', () => {

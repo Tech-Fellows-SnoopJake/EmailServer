@@ -5,7 +5,7 @@ import DOMPurify from 'dompurify';
 const EmailDetail = () => {
   const location = useLocation();
   const email = location.state?.email; // Access the passed email data
-  const sanitizedBody = DOMPurify.sanitize(email.body);
+  const sanitizedBody = email ? DOMPurify.sanitize(email.body) : '';
 
 
   if (!email) {
