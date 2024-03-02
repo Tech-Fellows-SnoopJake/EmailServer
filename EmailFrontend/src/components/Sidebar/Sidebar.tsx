@@ -17,9 +17,7 @@ const Sidebar = ( {setListType}: SidebarProps) => {
     try {
       // Realiza una solicitud POST al backend para crear la carpeta
       console.log("Folder name:", folderName);
-      const response = await axios.post("http://34.227.46.194:8000/", {
-        name: folderName,
-      });
+      
       // Si la creación es exitosa, actualiza el estado de las carpetas con la nueva carpeta
       setFolders((prevFolders) => [...prevFolders, folderName]);
       // Si la creación es exitosa, puedes hacer algo como recargar la lista de carpetas
