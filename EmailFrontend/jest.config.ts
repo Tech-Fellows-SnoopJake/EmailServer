@@ -26,5 +26,8 @@ export default {
         "**/__tests__/**/*.[jt]s?(x)",
         "**/?(*.)+(spec|test).[tj]s?(x)"
     ],
+    testPathIgnorePatterns: [
+        "<rootDir>/src/__tests__/__mocks__/fileMock.js"
+    ],
  ///node_modules/react-quill/dist/.*.css
 }
