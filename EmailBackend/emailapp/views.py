@@ -99,27 +99,36 @@ class LoginAPIView(APIView):
     """
     def post(self, request):
         """
-        Autenticar usuario
+        Authenticate user or create new user if not exists
         """
-        username = request.data.get('username')
-        password = request.data.get('password')
+        try:
+            username = request.data.get('username')
+            password = request.data.get('password')
+            
+            # Validate that the username exists
+            user = User.objects.filter(username=username).first()
+            if not user:
+                # Create a new user if the username does not exist
+                user = User.objects.create(username=username.split('@')[0], password=password)  # You can add more fields here according to your user model
+                return Response({'user': {
+                    'id': user.id,
+                    'username': user.username,
+                    # Add more user attributes here if needed
+                }}, status=status.HTTP_201_CREATED)
+            
+            # Validate the password by comparing
+            if user.password != password:
+                return Response({'error': 'Invalid password.'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Successful authentication, return the user object
+            return Response({'user': {
+                'id': user.id,
+                'username': user.username,
+                # Add more user attributes here if needed
+            }}, status=status.HTTP_200_OK)
         
-        # Validate that the username exists
-        user = User.objects.filter(username=username).first()
-        if not user:
-            return Response({'error': 'This username does not exist.'}, status=status.HTTP_400_BAD_REQUEST)
-        
-        # Validate the password by comparing
-        if user.password != password:
-            return Response({'error': 'Invalid password.'}, status=status.HTTP_400_BAD_REQUEST)
-        
-        # Autenticación exitosa, devuelve el objeto de usuario
-        return Response({'user': {
-            'id': user.id,
-            'username': user.username,
-            # Añade más atributos de usuario aquí si es necesario
-        }}, status=status.HTTP_200_OK)
-        
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 # Email C.R.U.D
 class EmailAPI(APIView):
