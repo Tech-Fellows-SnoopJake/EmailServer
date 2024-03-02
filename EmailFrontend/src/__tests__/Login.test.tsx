@@ -52,7 +52,7 @@ describe('Login component', () => {
     fireEvent.click(loginButton);
 
     await waitFor(() => {
-      expect(fetchMock).toHaveBeenCalledWith('http://localhost:8000/login/', {
+      expect(fetchMock).toHaveBeenCalledWith('http://34.227.46.194:8000/login/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: 'test@example.com', password: 'password123' }),

@@ -13,7 +13,7 @@ const Sidebar: React.FC = () => {
     try {
       // Realiza una solicitud POST al backend para crear la carpeta
       console.log("Folder name:", folderName);
-      const response = await axios.post("http://localhost:8000/", {
+      const response = await axios.post("http://34.227.46.194:8000/", {
         name: folderName,
       });
       // Si la creación es exitosa, actualiza el estado de las carpetas con la nueva carpeta
