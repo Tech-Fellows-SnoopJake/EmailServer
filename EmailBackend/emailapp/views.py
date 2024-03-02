@@ -225,7 +225,7 @@ class byEmail_APIView(APIView):
 # List of emails sent by user
 class bySend_APIView(APIView):
     """
-    API endpoint to retrieve a list of emails sent by user.
+    API endpoint to retrieve a list of emails sent by user..
     """
     #permission_classes = [IsAuthenticated]
     @csrf_exempt
