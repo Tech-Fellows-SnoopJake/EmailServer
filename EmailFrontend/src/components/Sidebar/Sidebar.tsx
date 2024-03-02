@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { Button } from "@nextui-org/react";
 import iconFolderSvg from "../../assets/createfolder.svg";
 

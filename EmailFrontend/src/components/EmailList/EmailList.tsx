@@ -28,7 +28,6 @@ const EmailList = ({ typeEmail }: EmailListProps) => {
         const response = await axios.get(`${API_URL}/${typeList}/${receiverEmail}/`);
         setEmails(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
-        console.error("Failed to fetch emails:", error);
         //error handling
       }
     };
