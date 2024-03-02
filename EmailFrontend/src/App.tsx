@@ -12,15 +12,20 @@ import ComposeEmail from "./components/ComposeEmail/ComposeEmail"
 import Login from "./components/Login/Login"
 import Register from "./components/Register/Register"
 import { Outlet } from "react-router-dom"
+import { useState } from "react"
 
 const handleLoginSuccess = () => {
   // Esta función se llamará cuando el inicio de sesión sea exitoso
   localStorage.setItem("isLoggedIn", "true")
 
   // Redireccionar al usuario a la bandeja de entrada
+  window.location.href = "/inbox"
   return <Navigate to="/inbox" />
 }
+
 function App() {
+  const [listType, setListType] = useState("inbox") 
+
   // Assuming you have a way to check if the user is logged in
   const isLoggedIn = () => {
     // Check login status, for now, let's assume a simple check
@@ -44,8 +49,10 @@ function App() {
           }
         />
         {/* Layout route for authenticated users */}
-        <Route path="/" element={<Layout />}>
-          <Route path="inbox" element={<EmailList />} />
+        <Route path="/" element={<Layout setListType={setListType}/>}>
+          <Route path="inbox" element={<EmailList typeEmail={listType} />} />
+          <Route path="sent" element={<EmailList typeEmail={listType} />} />
+
           <Route path="email/:id" element={<EmailDetail />} />
           <Route path="compose" element={<ComposeEmail />} />
         </Route>
@@ -54,12 +61,15 @@ function App() {
   )
 }
 
+interface LayoutProps {
+  setListType: React.Dispatch<React.SetStateAction<string>>
+}
 // Component to wrap the layout with Header and Sidebar
-const Layout = () => (
+const Layout = ( {setListType} : LayoutProps) => (
   <>
     <Header />
     <div className="main-container flex ">
-      <Sidebar />
+      <Sidebar setListType={setListType}/>
       <div className="content-area grow p-5 overflow-y-auto ">
         {/* Outlet will render the nested route components */}
         <Outlet />

@@ -17,7 +17,6 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   }
 
   const handleLogin = async (e: React.FormEvent) => {
-    console.log("username", username)
     e.preventDefault()
     try {
       if (!validateEmail(username)) {
@@ -33,15 +32,15 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
         body: JSON.stringify({ username, password }),
       })
 
-      localStorage.setItem("data1", JSON.stringify(response.json()))
+
+      //localStorage.setItem("data1", JSON.stringify(response.json()))
 
       // Verificar si la autenticación fue exitosa
       if (response.ok) {
         const data = await response.json()
         // Almacenar el token JWT en el localStorage o en las cookies
-        localStorage.setItem("id", data.user.id)
-        localStorage.setItem("username", data.user.username)
-        alert("Login Success")
+        localStorage.setItem("id", data.id)
+        localStorage.setItem("username", data.username)
         // Redireccionar al usuario a la página de inicio, por ejemplo
         onLoginSuccess()
       } else {

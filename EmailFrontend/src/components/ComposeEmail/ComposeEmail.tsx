@@ -42,12 +42,11 @@ const ComposeEmail: React.FC = () => {
       receiver,
       subject,
       body,
-      sender: "julian@snoopjake.com",
-      user: 3,
+      sender: localStorage.getItem("username"),
+      user: localStorage.getItem("id"),
     }
 
     try {
-      console.log(emailData)
       const response = await axios.post(apiUrl, emailData, {
         headers: {
           "Content-Type": "application/json",

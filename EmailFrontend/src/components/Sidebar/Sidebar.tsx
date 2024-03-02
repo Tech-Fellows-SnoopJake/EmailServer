@@ -4,7 +4,11 @@ import axios from "axios";
 import { Button } from "@nextui-org/react";
 import iconFolderSvg from "../../assets/createfolder.svg";
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+  setListType : React.Dispatch<React.SetStateAction<string>>
+}
+
+const Sidebar = ( {setListType}: SidebarProps) => {
   const [folderName, setFolderName] = useState("");
   const [folders, setFolders] = useState<string[]>([]);
   const [showInput, setShowInput] = useState(false);
@@ -19,7 +23,6 @@ const Sidebar: React.FC = () => {
       // Si la creación es exitosa, actualiza el estado de las carpetas con la nueva carpeta
       setFolders((prevFolders) => [...prevFolders, folderName]);
       // Si la creación es exitosa, puedes hacer algo como recargar la lista de carpetas
-      console.log("Folder created successfully:", response.data);
       // Aquí podrías recargar la lista de carpetas si es necesario
 
       // Oculta el input después de crear la carpeta
@@ -37,6 +40,10 @@ const Sidebar: React.FC = () => {
     setFolderName(event.target.value);
   };
 
+  const handleSetListType = (type: string) => {
+    setListType(type);
+  }
+
   return (
     <aside className="sidebar w-56 bg-gray-100 p-4 h-screen border-1 border-r-gray-200 flex-[0_0_250px]">
       <nav>
@@ -48,20 +55,20 @@ const Sidebar: React.FC = () => {
             Compose Email
           </Link>
         </div>
-        <ul className="list-none p-0">
+        <ul className="list-none p-0" onClick={e => console.log(e)}>
           <li className="py-2 hover:bg-gray-200">
             <Link to="/inbox" className="text-gray-700 hover:text-purple-700 ">
-              Inbox
+            <button onClick={() => handleSetListType("inbox")}>Inbox</button>
             </Link>
           </li>
           <li className="py-2 hover:bg-gray-200">
             <Link to="/sent" className="text-gray-700 hover:text-purple-700">
-              Sent
+            <button onClick={() => handleSetListType("send")}>Sent</button>
             </Link>
           </li>
           <li className="py-2 hover:bg-gray-200">
             <Link to="/drafts" className="text-gray-700 hover:text-purple-700">
-              Drafts
+              Draft
             </Link>
           </li>
           <li className="text-center pt-10 ">
