@@ -125,7 +125,7 @@ class EmailAPI(APIView):
     """
     API endpoint for Email CRUD operations.
     """
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     #Method to validate that the email exists
     @staticmethod
     def user_exists(username):
@@ -166,7 +166,7 @@ class EmailDetailsAPI(APIView):
     """
     API endpoint for retrieving, updating, or deleting a specific email.
     """
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         """
         Get email object by primary key.
@@ -208,7 +208,7 @@ class byEmail_APIView(APIView):
     """
     API endpoint to retrieve a list of emails received per user.
     """
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     @csrf_exempt
     def get(self, request, format=None, *args, **kwargs):
         """
@@ -225,9 +225,9 @@ class byEmail_APIView(APIView):
 # List of emails sent by user
 class bySend_APIView(APIView):
     """
-    API endpoint to retrieve a list of emails sent by user.
+    API endpoint to retrieve a list of emails sent by user..
     """
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     @csrf_exempt
     def get(self, request, format=None, *args, **kwargs):
         """
