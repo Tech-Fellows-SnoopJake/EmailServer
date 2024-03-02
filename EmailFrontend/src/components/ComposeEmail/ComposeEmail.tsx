@@ -48,7 +48,7 @@ const ComposeEmail: React.FC = () => {
       });
 
       // Check for non-2xx status codes
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         showMessage('Email sent successfully!', 'success');
         // Reset form fields
         setReceiver('');
