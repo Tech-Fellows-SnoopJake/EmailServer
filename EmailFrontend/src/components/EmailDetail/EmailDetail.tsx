@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 
+
 const EmailDetail = () => {
   const location = useLocation();
   const email = location.state?.email; // Access the passed email data

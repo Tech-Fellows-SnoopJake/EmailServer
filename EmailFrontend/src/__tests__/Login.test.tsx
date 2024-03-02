@@ -62,8 +62,9 @@ test('handles login errors correctly', async () => {
   const { getByLabelText, getByText } = render(<Login onLoginSuccess={() => {}} />);
   const emailInput = getByLabelText('email');
   const loginButton = getByText('Login');
-
+  const passwrordInput = "password123";
   fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+  fireEvent.change(getByLabelText('password'), { target: { value: passwrordInput } });
   fireEvent.click(loginButton);
 });
 
