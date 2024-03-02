@@ -25,11 +25,11 @@ describe('Login component', () => {
 
     act(() => {
       fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-      fireEvent.change(passwordInput, { target: { value: 'password123' } });
+      fireEvent.change(passwordInput, { target: { value: 'brHTAITnNdYmIyJ' } });
     });
 
     expect(emailInput.value).toBe('test@example.com');
-    expect(passwordInput.value).toBe('password123');
+    expect(passwordInput.value).toBe('brHTAITnNdYmIyJ');
   });
 
   test('submits login form correctly', async () => {
@@ -50,14 +50,14 @@ describe('Login component', () => {
 
 
     fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-    fireEvent.change(passwordInput, { target: { value: 'password123' } });
+    fireEvent.change(passwordInput, { target: { value: 'brHTAITnNdYmIyJ' } });
     fireEvent.click(loginButton);
 
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalledWith('http://34.227.46.194:8000/login/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: 'test@example.com', password: 'password123' }),
+        body: JSON.stringify({ username: 'test@example.com', password: 'brHTAITnNdYmIyJ' }),
       });
     });
 });
@@ -70,7 +70,7 @@ test('handles login errors correctly', async () => {
   const loginButton = getByText('Login');
   const passwrordInput = getByLabelText('password');
   fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-  fireEvent.change(passwrordInput, { target: { value: passwrordInput } });
+  fireEvent.change(passwrordInput, { target: { value: 'brHTAITnNdYmIyJ' } });
   fireEvent.click(loginButton);
 });
 
