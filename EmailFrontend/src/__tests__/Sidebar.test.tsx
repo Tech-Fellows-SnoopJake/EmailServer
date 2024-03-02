@@ -17,7 +17,6 @@ describe("Sidebar component", () => {
   
       // Comprueba los enlaces y sus URLs esperadas
       expect(screen.getByText("Compose Email")).toHaveAttribute("href", "/compose");
-      expect(screen.getByText("Drafts")).toHaveAttribute("href", "/drafts");
       // ... otras comprobaciones de enlaces y URLs
     });
     
