@@ -13,6 +13,7 @@
   "dependencies": {
     "@nextui-org/react": "^2.2.9",
     "axios": "^1.6.7",
+    "dompurify": "^3.0.9",
     "framer-motion": "^11.0.5",
     "jest-environment-jsdom": "^29.7.0",
     "jest-junit": "^16.0.0",

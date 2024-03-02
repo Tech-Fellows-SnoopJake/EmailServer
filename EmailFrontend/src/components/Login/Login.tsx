@@ -33,11 +33,15 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
         body: JSON.stringify({ username, password }),
       })
 
+      localStorage.setItem("data1", JSON.stringify(response.json()))
+
       // Verificar si la autenticación fue exitosa
       if (response.ok) {
         const data = await response.json()
         // Almacenar el token JWT en el localStorage o en las cookies
-        localStorage.setItem("token", data.access)
+        localStorage.setItem("id", data.user.id)
+        localStorage.setItem("username", data.user.username)
+        alert("Login Success")
         // Redireccionar al usuario a la página de inicio, por ejemplo
         onLoginSuccess()
       } else {
@@ -68,7 +72,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   return (
     <div className="login-bg  h-screen bg-gradient-to-r from-[#4b61a6] from-0% via-[#4b61a6] via-50% to-[#afb7cf] to-100% flex flex-row  items-center justify-center">
       <div className="login-con absolute p-6 h-auto w-auto rounded-[18px]  bg-[#8091F2]  ">
-        <h1 className="text-center mb-4 text-[#274073] text-2xl">
+        <h1 className="text-center m-12 text-[#274073] text-2xl">
           Sign In to EmailBox
         </h1>
         <div className="line-top mb-6 border border-solid border-white "></div>
@@ -82,7 +86,6 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
               setPassword(password)
             }}
           />
-          
 
           <Popover placement="right">
             <PopoverTrigger>
