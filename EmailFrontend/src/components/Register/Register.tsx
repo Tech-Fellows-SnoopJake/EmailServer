@@ -11,7 +11,7 @@ const Register = () => {
    
     try {
       // Realizar la solicitud al servidor para registrar al usuario
-      const response = await fetch('http://34.227.46.194:/users/', {
+      const response = await fetch('http://34.227.46.194:8000/users/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
