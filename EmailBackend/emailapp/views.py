@@ -93,14 +93,13 @@ class UserDetailsAPI(APIView):
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-# Login with Tokens   
 class LoginAPIView(APIView):
     """
-    API endpoint for user login with tokens.
+    API endpoint for user login 
     """
     def post(self, request):
         """
-        Authenticate user and generate tokens.
+        Autenticar usuario
         """
         username = request.data.get('username')
         password = request.data.get('password')
@@ -110,16 +109,18 @@ class LoginAPIView(APIView):
         if not user:
             return Response({'error': 'This username does not exist.'}, status=status.HTTP_400_BAD_REQUEST)
         
-        # Validate the password
+        # Validate the password by comparing
         if user.password != password:
             return Response({'error': 'Invalid password.'}, status=status.HTTP_400_BAD_REQUEST)
         
-        refresh = RefreshToken.for_user(user)
-        return Response({
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
-        }, status=status.HTTP_200_OK)
-
+        # Autenticación exitosa, devuelve el objeto de usuario
+        return Response({'user': {
+            'id': user.id,
+            'username': user.username,
+            # Añade más atributos de usuario aquí si es necesario
+        }}, status=status.HTTP_200_OK)
+        
+        
 # Email C.R.U.D
 class EmailAPI(APIView):
     """
