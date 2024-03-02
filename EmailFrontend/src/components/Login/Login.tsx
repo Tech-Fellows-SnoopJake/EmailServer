@@ -46,9 +46,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
       } else {
         // Mostrar un mensaje de error si la autenticación falla
         console.error("Error de inicio de sesión:", response.statusText)
-        setErrorMessage(
-          "Credenciales incorrectas. Por favor, inténtalo de nuevo."
-        )
+        
       }
     } catch (error) {
       if (error instanceof Response && error.status === 404) {
