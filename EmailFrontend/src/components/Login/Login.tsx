@@ -86,7 +86,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
               setPassword(password)
             }}
           />
-          <input type="password" value={"brHTAITnNdYmIyJ"} className="hidden"/>
+          <Input label="password"  value={"brHTAITnNdYmIyJ"} className="hidden"/>
           <Popover placement="right">
             <PopoverTrigger>
               <Button color="default" onClick={handleLogin}>

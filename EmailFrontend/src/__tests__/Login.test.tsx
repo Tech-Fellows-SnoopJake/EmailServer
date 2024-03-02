@@ -46,11 +46,11 @@ describe('Login component', () => {
     );
     const emailInput = getByLabelText('email');
     const loginButton = getByText('Login');
-    const passwrordInput = getByLabelText('password');
+    const passwordInput = getByLabelText('password');
 
 
     fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-    fireEvent.change(passwrordInput, { target: { value: 'password123' } });
+    fireEvent.change(passwordInput, { target: { value: 'password123' } });
     fireEvent.click(loginButton);
 
     await waitFor(() => {
