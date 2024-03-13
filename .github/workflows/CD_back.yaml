@@ -6,6 +6,10 @@ on:
     branches: [main]
     types: [completed]
 
+env:
+  PORT: 8000
+  COMMIT_SHA: ${{ github.sha }}
+  IMAGE_NAME: emailserver
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -18,8 +22,15 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
+    - name: Set outputs
+      id: vars
+      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
     - name: Deploy to EC2
       run: |
-        ssh -o StrictHostKeyChecking=no -l ubuntu ec2-34-224-82-4.compute-1.amazonaws.com <<EOF
-          ls
+        ssh -o StrictHostKeyChecking=no -l ubuntu ec2-34-227-46-194.compute-1.amazonaws.com <<EOF
+          sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
+
+          ls -l
+          sudo docker run --env-file ./.env -d -p ${{ env.PORT }}:8000 ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
         EOF
