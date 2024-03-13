@@ -3,13 +3,22 @@ name: CD_back Pipeline
 on:
   workflow_run:
     workflows: ['ci_back']
-    branches: [main]
+    branches: [jfra_backend_branch]
     types: [completed]
+
 
 env:
   PORT: 8000
   COMMIT_SHA: ${{ github.sha }}
   IMAGE_NAME: emailserver
+  REF1: ${{ github.ref }}
+  REF2: ${{ github.event.workflow_run.head_branch }}
+  REF3: ${{ github.event.inputs.branch }}
+  COMMIT_HASH: ${{ github.event.inputs.commit_hash }}
+  GITHUB_OUTPUT: ${{ github.event.inputs.github_output }}
+  CBRANCH: ${{ github.event.inputs.branch }}
+  CCOMMIT: ${{ github.event.workflow_run.head_sha }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -24,13 +33,15 @@ jobs:
 
     - name: Set outputs
       id: vars
-      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      run: echo "sha_short=$(echo $CCOMMIT | cut -c1-7)" >> $GITHUB_OUTPUT
 
     - name: Deploy to EC2
       run: |
         ssh -o StrictHostKeyChecking=no -l ubuntu ec2-34-227-46-194.compute-1.amazonaws.com <<EOF
           sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
-
-          ls -l
-          sudo docker run --env-file ./.env -d -p ${{ env.PORT }}:8000 ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
+          ./detener_contenedor_back.sh
+          ls -la
+          sudo docker run --env-file envVars.txt -d -p ${{ env.PORT }}:8000 ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
+          sudo docker container prune -f
+          sudo docker image prune -a 
         EOF

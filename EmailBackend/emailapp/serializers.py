@@ -4,7 +4,11 @@ from .models import Email, Folder, User
 
 class UserSerializer(serializers.ModelSerializer):
     """
+<<<<<<< HEAD
     Serializer for the User model.
+=======
+    Serializer for the User model..
+>>>>>>> jfra_backend_branch
     """
     class Meta:
         model = User

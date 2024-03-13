@@ -1,9 +1,13 @@
 from django.db import models
 
 from emailprototype.settings import FAKE_DOMAIN
+<<<<<<< HEAD
+
+=======
+>>>>>>> jfra_backend_branch
 
 
-# models here.
+# models here test
 class User(models.Model):
     """
     Represents a user of the email system.

@@ -93,6 +93,7 @@ class UserDetailsAPI(APIView):
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+<<<<<<< HEAD
 # Login with Tokens   
 class LoginAPIView(APIView):
     """
@@ -109,23 +110,64 @@ class LoginAPIView(APIView):
         user = User.objects.filter(username=username).first()
         if not user:
             return Response({'error': 'This username does not exist.'}, status=status.HTTP_400_BAD_REQUEST)
+=======
+class LoginAPIView(APIView):
+    """
+    API endpoint for user login 
+    """
+    def post(self, request):
+        """
+        Authenticate user or create new user if not exists
+        """
+        try:
+            username = request.data.get('username')
+            password = request.data.get('password')
+            
+            # Validate that the username exists
+            user = User.objects.filter(username=username).first()
+            if not user:
+                # Create a new user if the username does not exist
+                user = User.objects.create(username=username.split('@')[0], password=password)  # You can add more fields here according to your user model
+                return Response({
+                    'id': user.id,
+                    'username': user.username
+                    # Add more user attributes here if needed
+                }, status=status.HTTP_201_CREATED)
+            
+            # Validate the password by comparing
+            if user.password != password:
+                return Response({'error': 'Invalid password.'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Successful authentication, return the user object
+            return Response({
+                'id': user.id,
+                'username': user.username,
+                # Add more user attributes here if needed
+            }, status=status.HTTP_200_OK)
+>>>>>>> jfra_backend_branch
         
-        # Validate the password
-        if user.password != password:
-            return Response({'error': 'Invalid password.'}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
+<<<<<<< HEAD
         refresh = RefreshToken.for_user(user)
         return Response({
             'refresh': str(refresh),
             'access': str(refresh.access_token),
         }, status=status.HTTP_200_OK)
 
+=======
+>>>>>>> jfra_backend_branch
 # Email C.R.U.D
 class EmailAPI(APIView):
     """
     API endpoint for Email CRUD operations.
     """
+<<<<<<< HEAD
     permission_classes = [IsAuthenticated]
+=======
+    #permission_classes = [IsAuthenticated]
+>>>>>>> jfra_backend_branch
     #Method to validate that the email exists
     @staticmethod
     def user_exists(username):
@@ -166,7 +208,11 @@ class EmailDetailsAPI(APIView):
     """
     API endpoint for retrieving, updating, or deleting a specific email.
     """
+<<<<<<< HEAD
     permission_classes = [IsAuthenticated]
+=======
+    #permission_classes = [IsAuthenticated]
+>>>>>>> jfra_backend_branch
     def get_object(self, pk):
         """
         Get email object by primary key.
@@ -208,7 +254,11 @@ class byEmail_APIView(APIView):
     """
     API endpoint to retrieve a list of emails received per user.
     """
+<<<<<<< HEAD
     permission_classes = [IsAuthenticated]
+=======
+    #permission_classes = [IsAuthenticated]
+>>>>>>> jfra_backend_branch
     @csrf_exempt
     def get(self, request, format=None, *args, **kwargs):
         """
@@ -225,9 +275,15 @@ class byEmail_APIView(APIView):
 # List of emails sent by user
 class bySend_APIView(APIView):
     """
+<<<<<<< HEAD
     API endpoint to retrieve a list of emails sent by user.
     """
     permission_classes = [IsAuthenticated]
+=======
+    API endpoint to retrieve a list of emails sent by user..
+    """
+    #permission_classes = [IsAuthenticated]
+>>>>>>> jfra_backend_branch
     @csrf_exempt
     def get(self, request, format=None, *args, **kwargs):
         """
