@@ -35,6 +35,9 @@ jobs:
           sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
           
           ./detener_contenedor.sh
+          
           ls -la
           sudo docker run -d -p ${{ env.PORT }}:80 ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
+          sudo docker container prune -f
+          sudo docker image prune -a 
         EOF

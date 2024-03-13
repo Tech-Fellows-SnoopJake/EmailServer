@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+from datetime import timedelta
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -29,11 +30,9 @@ SECRET_KEY = 'django-insecure-ctulx*6&w$rh+t24m0n=twoe(n7wz=&3c2n*ay68b882o4cgx!
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-
-
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS = [    
     'clearcache',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,8 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'emailapp'
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'emailprototype.urls'
@@ -73,6 +76,17 @@ TEMPLATES = [
     },
 ]
 
+#JWT
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+}
+
 WSGI_APPLICATION = 'emailprototype.wsgi.application'
 
 
@@ -89,11 +103,7 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT'),
     }
 }
-
-CORS_ALLOWED_ORIGINS = [
-    '*'
-    # Add any other origins that should be allowed to make requests
-]
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -135,3 +145,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Just a fake domain :P
+FAKE_DOMAIN = '@snoopjake.com'

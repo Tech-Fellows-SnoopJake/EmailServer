@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
 
+# Define urlpatterns
 urlpatterns = [
-    path('admin/clearcache/', include('clearcache.urls')),
-    path('admin/', admin.site.urls),
-    path('user/', include('emailapp.urls')),
+    path('admin/', admin.site.urls),  # Admin panel endpoint
+    path('', include('emailapp.urls')),  # Include emailapp URLs
 ]

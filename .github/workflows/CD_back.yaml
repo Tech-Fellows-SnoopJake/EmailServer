@@ -6,6 +6,7 @@ on:
     branches: [jfra_backend_branch]
     types: [completed]
 
+
 env:
   PORT: 8000
   COMMIT_SHA: ${{ github.sha }}
@@ -42,4 +43,6 @@ jobs:
           ./detener_contenedor_back.sh
           ls -la
           sudo docker run --env-file envVars.txt -d -p ${{ env.PORT }}:8000 ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
+          sudo docker container prune -f
+          sudo docker image prune -a 
         EOF
