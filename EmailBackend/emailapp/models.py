@@ -1,10 +1,6 @@
 from django.db import models
 
 from emailprototype.settings import FAKE_DOMAIN
-<<<<<<< HEAD
-
-=======
->>>>>>> jfra_backend_branch
 
 
 # models here test
