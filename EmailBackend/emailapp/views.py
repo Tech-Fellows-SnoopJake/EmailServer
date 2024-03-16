@@ -109,7 +109,7 @@ class LoginAPIView(APIView):
             user = User.objects.filter(username=username).first()
             if not user:
                 # Create a new user if the username does not exist
-                user = User.objects.create(username=username.split('@')[0], password=password)  # You can add more fields here according to your user model
+                user = User.objects.create(username=username.split('@')[0], password=password) 
                 return Response({
                     'id': user.id,
                     'username': user.username
@@ -256,7 +256,7 @@ class Folders_APIView(viewsets.ModelViewSet):
     """
     API endpoint for Folder CRUD operations.
     """
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     queryset = Folder.objects.all()
     serializer_class = FolderSerializer
     
