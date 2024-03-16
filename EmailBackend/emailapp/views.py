@@ -256,7 +256,7 @@ class Folders_APIView(viewsets.ModelViewSet):
     """
     API endpoint for Folder CRUD operations.
     """
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     queryset = Folder.objects.all()
     serializer_class = FolderSerializer
     
