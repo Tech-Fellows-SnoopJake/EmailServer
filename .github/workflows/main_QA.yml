@@ -65,4 +65,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: EmailBackend/
+          args: >
+                -Dsonar.projectKey=Valwolfor_EmailServer
+                -Dsonar.organization=valwolfor-sonar
   
