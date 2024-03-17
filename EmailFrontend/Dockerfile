@@ -11,4 +11,4 @@ COPY . .
 
 EXPOSE 80
 
-CMD ["npm", "run", "dev", "--", "--port", "80"];
+CMD ["npm", "run", "dev", "--", "--port", "80"]

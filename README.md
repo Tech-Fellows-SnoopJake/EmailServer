@@ -17,3 +17,7 @@ This repository contains both the `frontend` content of our email client and the
 Each of these `front` and `back` repos contain their respectives ``README`` files that further explain the details of their respective domain.
 
 Cheers!
+
+## HG 02 Improvements
+
+This begin here.
