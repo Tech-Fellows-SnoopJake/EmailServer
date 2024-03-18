@@ -20,4 +20,4 @@ Cheers!
 
 ## HG 02 Improvements
 
-This begin here.
+This begin here. Sonar configuration
