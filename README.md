@@ -22,4 +22,5 @@ Cheers!
 
 This begins here. 
 - Sonar configuration
-- First tes
+- First test
+  - changes in EC2 id, and versión of action. -v to debug.
