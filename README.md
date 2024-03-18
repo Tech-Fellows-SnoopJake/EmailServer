@@ -31,3 +31,5 @@ This begins here.
     - sudo usermod -aG docker ubuntu.
   - Change in ssh routes of command in front and back.
     - add line to login docker GHCR. 
+    - Edit tokken GitHub for GHCR.
+    
