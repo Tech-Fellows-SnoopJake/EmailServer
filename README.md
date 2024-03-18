@@ -21,13 +21,15 @@ Cheers!
 ## HG 02 Improvements
 
 This begins here. 
-- Sonar configuration
-- First test
+- Sonar configuration.
+- First test.
   - changes in EC2 id, and versión of action. -v to debug.
   - ~~Set up instance EC2 as Secrets~~
-  - New try with the instance on code
-    - sudo apt-get update
-      sudo apt-get install docker.io
-    - sudo usermod -aG docker ubuntu
-  - CHange in ssh routes of command in front and back.
-    - add line to login docker GHCR
+  - New try with the instance on code.
+    - sudo apt-get update.
+      sudo apt-get install docker.io.
+    - sudo usermod -aG docker ubuntu.
+  - Change in ssh routes of command in front and back.
+    - add line to login docker GHCR. 
+    - Edit tokken GitHub for GHCR.
+    
