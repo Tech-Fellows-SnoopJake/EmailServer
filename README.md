@@ -29,5 +29,5 @@ This begins here.
     - sudo apt-get update.
       sudo apt-get install docker.io.
     - sudo usermod -aG docker ubuntu.
-  - CHange in ssh routes of command in front and back.
+  - Change in ssh routes of command in front and back.
     - add line to login docker GHCR. 
