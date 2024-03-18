@@ -42,7 +42,6 @@ jobs:
 #sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars
     - name: Deploy to EC2
       run: |
-        echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
         ssh -v -o StrictHostKeyChecking=no -l ubuntu ec2-18-118-254-205.us-east-2.compute.amazonaws.com <<EOF
           sudo docker pull ghcr.io/valwolfor/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
           ./detener_contenedor_back.sh
