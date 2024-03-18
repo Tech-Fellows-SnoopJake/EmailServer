@@ -18,7 +18,7 @@ from .models import Email, Folder, User
 # User C.R.U.D
 class UserAPI(APIView):
     """
-    API endpoint for User CRUD operations.
+    API endpoint for User CRUD operations
     """
     @method_decorator(csrf_exempt)
     def get(self, request):
