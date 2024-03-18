@@ -24,4 +24,4 @@ This begins here.
 - Sonar configuration
 - First test
   - changes in EC2 id, and versión of action. -v to debug.
-  - Set up instance EC2 as Secrets
+  - ~~Set up instance EC2 as Secrets~~
