@@ -37,7 +37,7 @@ jobs:
 
 # adding step
     - name: Login to GitHub Container Registry
-      run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      run: docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GHCR_PAT }}
 
 #sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars
     - name: Deploy to EC2
