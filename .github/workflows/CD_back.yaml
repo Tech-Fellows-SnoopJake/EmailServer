@@ -35,6 +35,10 @@ jobs:
       id: vars
       run: echo "sha_short=$(echo $CCOMMIT | cut -c1-7)" >> $GITHUB_OUTPUT
 
+# adding step
+    - name: Login to GitHub Container Registry
+      run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
 #sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars
     - name: Deploy to EC2
       run: |
