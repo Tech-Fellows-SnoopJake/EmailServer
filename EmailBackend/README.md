@@ -6,7 +6,6 @@
 - Manage and store emails in PostgreSQL.
 - RESTful API for interacting with the email system, users and folders
 
-
 ## Technologies Used
 
 - [Django](https://www.djangoproject.com/)
@@ -38,7 +37,7 @@ python manage.py runserver
 
 To run this project, you will need to add the following environment variables to your `.env` file in the project root directory. Do not include sensitive information directly in your project files or documentation.
 
-``` bash
+```bash
 SECRET_KEY='your_secret_key_here'
 DEBUG='True' # Set to 'False' in production
 DB_NAME='your_postgres_db_name'
@@ -50,4 +49,7 @@ ALLOWED_HOSTS='your_domain.com,www.your_domain.com'
 ```
 
 ## Usage
+
 - Access http://localhost:8000/ in your browser to interact with the application.
+
+1 testing CI_back workflow
