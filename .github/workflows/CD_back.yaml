@@ -1,4 +1,4 @@
-vvname: CD_back Pipeline
+name: CD_back Pipeline
 
 on:
   workflow_run:
