@@ -22,4 +22,4 @@ Cheers!
 
 This begins here. 
 - Sonar configuration
-- First test 
+- First tes
