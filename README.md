@@ -20,4 +20,7 @@ Cheers!
 
 ## HG 02 Improvements
 
-This begin here. Sonar configuration
+This begins here. 
+- Sonar configuration
+- First test
+  - changes in EC2 id, and versión of action. -v to debug.

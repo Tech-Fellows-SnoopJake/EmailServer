@@ -110,6 +110,7 @@ class LoginAPIView(APIView):
             if not user:
                 # Create a new user if the username does not exist
                 user = User.objects.create(username=username.split('@')[0], password=password)
+
                 return Response({
                     'id': user.id,
                     'username': user.username
