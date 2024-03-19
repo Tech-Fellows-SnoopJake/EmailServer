@@ -38,6 +38,7 @@ This begins here.
     - JPy5jKpp
   - change without sudo. 
   - Set files envVars and detener*
+  - Set the RDS Intance as public
 
 >[!IMPORTANT]
 > We need to set the host of the DB, and de host of the EC2 every time that restart the instances.
