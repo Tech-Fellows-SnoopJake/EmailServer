@@ -38,7 +38,7 @@ jobs:
       #quit sudo
       - name: Deploy to EC2
         run: |
-          ssh -vvv -o StrictHostKeyChecking=no -l ubuntu ec2-18-119-164-214.us-east-2.compute.amazonaws.com <<EOF
+          ssh -vvv -o StrictHostKeyChecking=no -l ubuntu ec2-18-119-121-232.us-east-2.compute.amazonaws.com <<EOF
             docker pull ghcr.io/valwolfor/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
             ./detener_contenedor_back.sh
             ls -la

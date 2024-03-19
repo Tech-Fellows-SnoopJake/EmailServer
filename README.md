@@ -37,5 +37,9 @@ This begins here.
     - postgres
     - JPy5jKpp
   - change without sudo. 
-  - Set files envVars y detener*
+  - Set files envVars and detener*
+
+>[!IMPORTANT]
+> We need to set the host of the DB, and de host of the EC2 every time that restart the instances.
+> In CD front y back and change the host DB int the file of envVars.txt into the EC2 Instance.
 
