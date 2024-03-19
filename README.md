@@ -29,11 +29,13 @@ This begins here.
     - sudo apt-get update
       sudo apt-get install docker.io
     - sudo usermod -aG docker ubuntu
-  - CHange in ssh routes of command in front and back.
-    - add line to login docker GHCR
+  - Change in ssh routes of command in front and back.
+    - ~~add line to login docker GHCR~~
+    - Login direct GHCR from EC2 intance 
   - set Var BD schema 
     - test_jake 
-    - admin
+    - postgres
     - JPy5jKpp
-    - 127.0.0.1
+  - change without sudo. 
+  - Set files envVars y detener*
 
