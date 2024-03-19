@@ -31,3 +31,8 @@ This begins here.
     - sudo usermod -aG docker ubuntu
   - CHange in ssh routes of command in front and back.
     - add line to login docker GHCR
+  - set Var BD schema 
+    - test_jake 
+    - admin
+    - JPy5jKpp
+    - 127.0.0.1
