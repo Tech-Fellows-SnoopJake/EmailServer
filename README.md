@@ -39,6 +39,7 @@ This begins here.
   - change without sudo. 
   - Set files envVars and detener*
   - Set the RDS Instance as public
+    - Connection done. 
 
 >[!IMPORTANT]
 > We need to set the host of the DB, and de host of the EC2 every time that restart the instances.
