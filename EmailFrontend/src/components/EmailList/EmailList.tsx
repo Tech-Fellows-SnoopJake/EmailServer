@@ -16,8 +16,8 @@ interface EmailListProps {
 
 const EmailList = ({ typeEmail }: EmailListProps) => {
   const [emails, setEmails] = useState<Email[]>([]);
-
-  const API_URL = "http://34.227.46.194:8000";
+//TODO fix IP
+  const API_URL = "http://18.119.121.232:8000";
 
   useEffect(() => {
     const fetchEmails = async () => {
