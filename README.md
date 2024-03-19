@@ -38,8 +38,9 @@ This begins here.
     - JPy5jKpp
   - change without sudo. 
   - Set files envVars and detener*
+    - Needed execution permissions `chmod +x namefile`
   - Set the RDS Instance as public
-    - Connection done. 
+    - Connection done. Set acl 5432
 
 >[!IMPORTANT]
 > We need to set the host of the DB, and de host of the EC2 every time that restart the instances.
