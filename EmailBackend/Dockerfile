@@ -11,6 +11,13 @@ ENV PYTHONUNBUFFERED 1
 # install dependencies
 RUN pip install --upgrade pip
 RUN pip install --upgrade setuptools
+# install pkg-config for mysqlclient
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    default-libmysqlclient-dev \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
