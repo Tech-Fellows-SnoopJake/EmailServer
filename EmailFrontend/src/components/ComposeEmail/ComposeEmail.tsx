@@ -36,7 +36,7 @@ const ComposeEmail: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-  //TODO fix api
+  //TODO: fix api
     const apiUrl = "http://18.119.121.232:8000/emails/" //
     const emailData = {
       receiver,
