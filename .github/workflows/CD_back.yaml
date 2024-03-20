@@ -35,7 +35,7 @@ jobs:
         run: echo "sha_short=$(echo $CCOMMIT | cut -c1-7)" >> $GITHUB_OUTPUT
 
       #sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars
-      #quit sudo
+      #quit sudo - changing yml
       - name: Deploy to EC2
         run: |
           ssh -vvv -o StrictHostKeyChecking=no -l ubuntu ec2-18-119-121-232.us-east-2.compute.amazonaws.com <<EOF
