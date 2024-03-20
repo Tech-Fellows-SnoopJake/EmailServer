@@ -5,6 +5,7 @@ import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react"
 interface LoginProps {
   onLoginSuccess: () => void
 }
+//TODO: fix and adapt when register ok.
 const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("brHTAITnNdYmIyJ")

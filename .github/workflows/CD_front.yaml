@@ -31,13 +31,13 @@ jobs:
 
     - name: Deploy to EC2
       run: |
-        ssh -o StrictHostKeyChecking=no -l ubuntu ec2-34-227-46-194.compute-1.amazonaws.com <<EOF
-          sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
+        ssh -o StrictHostKeyChecking=no -l ubuntu ec2-18-119-121-232.us-east-2.compute.amazonaws.com <<EOF
+          docker pull ghcr.io/valwolfor/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
           
           ./detener_contenedor.sh
           
           ls -la
-          sudo docker run -d -p ${{ env.PORT }}:80 ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
-          sudo docker container prune -f
-          sudo docker image prune -a 
+          docker run -d -p ${{ env.PORT }}:80 ghcr.io/valwolfor/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
+          docker container prune -f
+          docker image prune -a 
         EOF

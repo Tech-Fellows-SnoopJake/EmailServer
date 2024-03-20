@@ -93,24 +93,6 @@ class UserDetailsAPI(APIView):
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-<<<<<<< HEAD
-# Login with Tokens   
-class LoginAPIView(APIView):
-    """
-    API endpoint for user login with tokens.
-    """
-    def post(self, request):
-        """
-        Authenticate user and generate tokens.
-        """
-        username = request.data.get('username')
-        password = request.data.get('password')
-        
-        # Validate that the username exists
-        user = User.objects.filter(username=username).first()
-        if not user:
-            return Response({'error': 'This username does not exist.'}, status=status.HTTP_400_BAD_REQUEST)
-=======
 class LoginAPIView(APIView):
     """
     API endpoint for user login 
@@ -127,7 +109,8 @@ class LoginAPIView(APIView):
             user = User.objects.filter(username=username).first()
             if not user:
                 # Create a new user if the username does not exist
-                user = User.objects.create(username=username.split('@')[0], password=password)  # You can add more fields here according to your user model
+                user = User.objects.create(username=username.split('@')[0], password=password)
+
                 return Response({
                     'id': user.id,
                     'username': user.username
@@ -144,30 +127,16 @@ class LoginAPIView(APIView):
                 'username': user.username,
                 # Add more user attributes here if needed
             }, status=status.HTTP_200_OK)
->>>>>>> jfra_backend_branch
         
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
-<<<<<<< HEAD
-        refresh = RefreshToken.for_user(user)
-        return Response({
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
-        }, status=status.HTTP_200_OK)
-
-=======
->>>>>>> jfra_backend_branch
 # Email C.R.U.D
 class EmailAPI(APIView):
     """
     API endpoint for Email CRUD operations.
     """
-<<<<<<< HEAD
-    permission_classes = [IsAuthenticated]
-=======
     #permission_classes = [IsAuthenticated]
->>>>>>> jfra_backend_branch
     #Method to validate that the email exists
     @staticmethod
     def user_exists(username):
@@ -208,11 +177,7 @@ class EmailDetailsAPI(APIView):
     """
     API endpoint for retrieving, updating, or deleting a specific email.
     """
-<<<<<<< HEAD
-    permission_classes = [IsAuthenticated]
-=======
     #permission_classes = [IsAuthenticated]
->>>>>>> jfra_backend_branch
     def get_object(self, pk):
         """
         Get email object by primary key.
@@ -254,11 +219,7 @@ class byEmail_APIView(APIView):
     """
     API endpoint to retrieve a list of emails received per user.
     """
-<<<<<<< HEAD
-    permission_classes = [IsAuthenticated]
-=======
     #permission_classes = [IsAuthenticated]
->>>>>>> jfra_backend_branch
     @csrf_exempt
     def get(self, request, format=None, *args, **kwargs):
         """
@@ -275,15 +236,9 @@ class byEmail_APIView(APIView):
 # List of emails sent by user
 class bySend_APIView(APIView):
     """
-<<<<<<< HEAD
-    API endpoint to retrieve a list of emails sent by user.
-    """
-    permission_classes = [IsAuthenticated]
-=======
     API endpoint to retrieve a list of emails sent by user..
     """
     #permission_classes = [IsAuthenticated]
->>>>>>> jfra_backend_branch
     @csrf_exempt
     def get(self, request, format=None, *args, **kwargs):
         """
@@ -302,7 +257,7 @@ class Folders_APIView(viewsets.ModelViewSet):
     """
     API endpoint for Folder CRUD operations.
     """
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     queryset = Folder.objects.all()
     serializer_class = FolderSerializer
     
