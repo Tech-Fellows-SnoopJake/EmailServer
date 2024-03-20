@@ -34,7 +34,7 @@ jobs:
         id: vars
         run: echo "sha_short=$(echo $CCOMMIT | cut -c1-7)" >> $GITHUB_OUTPUT
 
-#sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars
+      #sudo docker pull ghcr.io/tech-fellows-snoopjake/${{ env.IMAGE_NAME}}:sha-${{ steps.vars !!
       #quit sudo
       - name: Deploy to EC2
         run: |
@@ -46,4 +46,3 @@ jobs:
             docker container prune -f
             docker image prune -a 
           EOF
-
