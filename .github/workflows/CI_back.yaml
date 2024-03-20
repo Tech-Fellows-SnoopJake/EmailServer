@@ -18,14 +18,14 @@ jobs:
     permissions:
       contents: read
       packages: write
-      security-events: write  # This permission is added for SonarCloud analysis
-      
+      security-events: write # This permission is added for SonarCloud analysis
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones  disabled for SonarCloud compatibility
-      
+          fetch-depth: 0 # Shallow clones  disabled for SonarCloud compatibility
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -48,20 +48,18 @@ jobs:
             type=sha
 
       - name: Set DJango environment variables
-        run: |
-            echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
-            echo "DB_USER=${{ secrets.DB_USER }}" >> .env
-            echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-            echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
-            echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
-
+        #run: |
+        #    echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
+        #    echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+        #    echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+        #    echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+        #    echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
         env:
           DB_NAME: ${{ secrets.DB_NAME }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           DB_HOST: ${{ secrets.DB_HOST}}
           DB_PORT: ${{ secrets.DB_PORT}}
-
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -77,4 +75,3 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: EmailBackend/
-          
