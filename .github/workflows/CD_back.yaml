@@ -39,10 +39,10 @@ jobs:
       - name: Deploy to EC2
         run: |
           ssh -vvv -o StrictHostKeyChecking=no -l ubuntu ec2-18-119-121-232.us-east-2.compute.amazonaws.com <<EOF
-            docker pull ghcr.io/valwolfor/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
+            docker pull ghcr.io/homegroup0/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
             ./detener_contenedor_back.sh
             ls -la
-            docker run --env-file envVars.txt -d -p ${{ env.PORT }}:8000 ghcr.io/valwolfor/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
+            docker run --env-file envVars.txt -d -p ${{ env.PORT }}:8000 ghcr.io/homegroup0/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
             docker container prune -f
             docker image prune -a 
           EOF
