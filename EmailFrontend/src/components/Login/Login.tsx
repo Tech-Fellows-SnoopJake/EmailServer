@@ -24,8 +24,9 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
         setErrorMessage("Por favor, introduce un correo electrónico válido.")
         return
       }
+      //TODO: fix IP and refactor
       // Realizar la solicitud al servidor para autenticar al usuario
-      const response = await fetch("http://34.227.46.194:8000/login/", {
+      const response = await fetch("http://18.119.121.232:8000/login/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -71,7 +72,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
     <div className="login-bg  h-screen bg-gradient-to-r from-[#4b61a6] from-0% via-[#4b61a6] via-50% to-[#afb7cf] to-100% flex flex-row  items-center justify-center">
       <div className="login-con absolute p-6 h-auto w-auto rounded-[18px]  bg-[#8091F2]  ">
         <h1 className="text-center m-12 text-[#274073] text-2xl">
-          Sign In to EmailBox
+          Sign In to EmailBoxxxx
         </h1>
         <div className="line-top mb-6 border border-solid border-white "></div>
         <form className="login-form flex flex-col gap-4" onSubmit={handleLogin}>
