@@ -42,7 +42,13 @@ jobs:
             docker pull ghcr.io/homegroup0/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
             ./detener_contenedor_back.sh
             ls -la
-            docker run --env-file envVars.txt -d -p ${{ env.PORT }}:8000 ghcr.io/homegroup0/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
+            docker run -d -p ${{ env.PORT }}:8000 \
+              -e DB_NAME='${{ secrets.DB_NAME }}' \
+              -e DB_USER='${{ secrets.DB_USER }}' \
+              -e DB_PASSWORD='${{ secrets.DB_PASSWORD }}' \
+              -e DB_HOST='${{ secrets.DB_HOST }}' \
+              -e DB_PORT='${{ secrets.DB_PORT }}' \
+              ghcr.io/homegroup0/${{ env.IMAGE_NAME }}:sha-${{ steps.vars.outputs.sha_short }}
             docker container prune -f
             docker image prune -a 
           EOF
