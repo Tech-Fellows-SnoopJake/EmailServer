@@ -2,6 +2,14 @@
 import React, { useState } from "react"
 import { Button, Input } from "@nextui-org/react"
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react"
+
+const statusErrorMessages: Record<number, string> = {
+  400: "Error de Login: Solicitud incorrecta",
+  401: "Error de Login: No autorizado",
+  404: "Error de Login: Recurso no encontrado",
+  500: "Error de Login: Error interno del servidor",
+}
+
 interface LoginProps {
   onLoginSuccess: () => void
 }
@@ -24,7 +32,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
         setErrorMessage("Por favor, introduce un correo electrónico válido.")
         return
       }
-      //TODO: fix IP and refactor
+      //TODO: fix IP
       // Realizar la solicitud al servidor para autenticar al usuario
       const response = await fetch("http://18.119.121.232:8000/login/", {
         method: "POST",
@@ -51,17 +59,9 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
         
       }
     } catch (error) {
-      if (error instanceof Response && error.status === 404) {
-        console.error("Error de Login: Recurso no encontrado")
-      }
-      if (error instanceof Response && error.status === 401) {
-        console.error("Error de Login: No autorizado")
-      }
-      if (error instanceof Response && error.status === 400) {
-        console.error("Error de Login: Solicitud incorrecta")
-      }
-      if (error instanceof Response && error.status === 500) {
-        console.error("Error de Login: Error interno del servidor")
+      const status = error instanceof Response ? error.status : null
+      if (status && status in statusErrorMessages) {
+        console.error(statusErrorMessages[status])
       } else {
         console.error("Error de Login")
       }
@@ -72,7 +72,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
     <div className="login-bg  h-screen bg-gradient-to-r from-[#4b61a6] from-0% via-[#4b61a6] via-50% to-[#afb7cf] to-100% flex flex-row  items-center justify-center">
       <div className="login-con absolute p-6 h-auto w-auto rounded-[18px]  bg-[#8091F2]  ">
         <h1 className="text-center m-12 text-[#274073] text-2xl">
-          Sign In to EmailBoxxxx
+          Sign In to EmailBox
         </h1>
         <div className="line-top mb-6 border border-solid border-white "></div>
         <form className="login-form flex flex-col gap-4" onSubmit={handleLogin}>
