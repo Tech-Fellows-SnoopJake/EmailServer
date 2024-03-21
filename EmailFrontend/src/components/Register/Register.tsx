@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { Button, Input } from '@nextui-org/react';
 
+const statusErrorMessages: Record<number, string> = {
+  400: "Error de registro: Solicitud incorrecta",
+  401: "Error de registro: No autorizado",
+  404: "Error de registro: Recurso no encontrado",
+  500: "Error de registro: Error interno del servidor",
+}
+
 const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -34,19 +41,11 @@ const Register = () => {
         console.error('Error de registro:', response.statusText);
       }
     } catch (error) {
-      if (error instanceof Response && error.status === 404) {
-        console.error('Error de registro: Recurso no encontrado');
-      } 
-      if (error instanceof Response && error.status === 401) {
-        console.error('Error de registro: No autorizado');
-      }
-      if (error instanceof Response && error.status === 400) {
-        console.error('Error de registro: Solicitud incorrecta');
-      }
-      if (error instanceof Response && error.status === 500) {
-        console.error('Error de registro: Error interno del servidor');
-      }else {
-        console.error('Error de registro:');
+      const status = error instanceof Response ? error.status : null
+      if (status && status in statusErrorMessages) {
+        console.error(statusErrorMessages[status])
+      } else {
+        console.error("Error de Login")
       }
     }
   };
