@@ -38,7 +38,7 @@ python manage.py runserver
 To run this project, you will need to add the following environment variables to your `.env` file in the project root directory. Do not include sensitive information directly in your project files or documentation.
 
 ```bash
-SECRET_KEY='your_secret_key_here'
+DJANGO_SECRET_KEY='your_secret_key_here'
 DEBUG='True' # Set to 'False' in production
 DB_NAME='your_postgres_db_name'
 DB_USER='your_postgres_user'

@@ -5,7 +5,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, viewsets
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import IsAuthenticated
 
 from emailprototype.settings import FAKE_DOMAIN
 from .serializers import EmailSerializer, FolderSerializer, UserSerializer
@@ -136,7 +135,6 @@ class EmailAPI(APIView):
     """
     API endpoint for Email CRUD operations.
     """
-    #permission_classes = [IsAuthenticated]
     #Method to validate that the email exists
     @staticmethod
     def user_exists(username):
@@ -177,7 +175,6 @@ class EmailDetailsAPI(APIView):
     """
     API endpoint for retrieving, updating, or deleting a specific email.
     """
-    #permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         """
         Get email object by primary key.
@@ -219,7 +216,6 @@ class byEmail_APIView(APIView):
     """
     API endpoint to retrieve a list of emails received per user.
     """
-    #permission_classes = [IsAuthenticated]
     @csrf_exempt
     def get(self, request, format=None, *args, **kwargs):
         """
@@ -238,7 +234,6 @@ class bySend_APIView(APIView):
     """
     API endpoint to retrieve a list of emails sent by user..
     """
-    #permission_classes = [IsAuthenticated]
     @csrf_exempt
     def get(self, request, format=None, *args, **kwargs):
         """
@@ -257,7 +252,6 @@ class Folders_APIView(viewsets.ModelViewSet):
     """
     API endpoint for Folder CRUD operations.
     """
-    #permission_classes = [IsAuthenticated]
     queryset = Folder.objects.all()
     serializer_class = FolderSerializer
     
