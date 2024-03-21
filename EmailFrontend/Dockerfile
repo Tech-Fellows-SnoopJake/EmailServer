@@ -1,15 +1,14 @@
-FROM node:18-alpine
+FROM node:18.10-alpine3.15
 
 WORKDIR /app
+COPY . /app
 
-COPY package.json .
+COPY package.json package.json
 
-RUN npm install
+RUN npm i 
 
 COPY . .
 
-RUN npm run build
+EXPOSE 80
 
-EXPOSE 8080
-
-CMD [ "npm", "run", "preview" ]
+CMD ["npm", "run", "dev", "--", "--port", "80"]

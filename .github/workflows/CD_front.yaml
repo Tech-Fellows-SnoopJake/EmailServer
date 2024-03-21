@@ -1,10 +1,17 @@
 name: CD_front Pipeline
 
+# Information about the event that triggers the workflow
 on:
   workflow_run:
     workflows: ['ci_front']
-    branches: [main]
+    branches: [jfra_frontend_branch]
     types: [completed]
+
+env:
+  PORT: 80
+  COMMIT_SHA: ${{ github.sha }}
+  IMAGE_NAME: emailserver
+  CCOMMIT: ${{ github.event.workflow_run.head_sha }}
 
 jobs:
   deploy:
@@ -18,8 +25,19 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
+    - name: Set outputs
+      id: vars
+      run: echo "sha_short=$(echo $CCOMMIT | cut -c1-7)" >> $GITHUB_OUTPUT
+
     - name: Deploy to EC2
       run: |
-        ssh -o StrictHostKeyChecking=no -l ubuntu ec2-34-224-82-4.compute-1.amazonaws.com <<EOF
-          ls
+        ssh -o StrictHostKeyChecking=no -l ubuntu ec2-18-119-121-232.us-east-2.compute.amazonaws.com <<EOF
+          docker pull ghcr.io/homegroup0/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
+          
+          ./detener_contenedor.sh
+          
+          ls -la
+          docker run -d -p ${{ env.PORT }}:80 ghcr.io/homegroup0/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
+          docker container prune -f
+          docker image prune -a 
         EOF
