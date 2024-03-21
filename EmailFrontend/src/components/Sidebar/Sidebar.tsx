@@ -52,7 +52,7 @@ const Sidebar = ( {setListType}: SidebarProps) => {
             Compose Email
           </Link>
         </div>
-        <ul className="list-none p-0" onClick={e => console.log(e)}>
+        <ul className="list-none p-0">
           <li className="py-2 hover:bg-gray-200">
             <Link to="/inbox" className="text-gray-700 hover:text-purple-700 ">
             <button onClick={() => handleSetListType("inbox")}>Inbox</button>

@@ -16,7 +16,7 @@ const Header: React.FC = () => {
         <div className="search-bar w-96 text-center">
           <input type="text" placeholder="Search in mail" className="search-input w-96 text-center text-base p-2 border-0 rounded-[4px] mr-4 text-[#000] "/>
         </div>
-        <div className="user-profile relative cursor-pointer" onClick={toggleDropdown}>
+        <div className="user-profile relative cursor-pointer" onClick={toggleDropdown} role='button'>
           {/* User profile icon */}
           <img src={iconSvg} alt="User profile" className="profile-icon size-10"/>
           {/* Dropdown list */}

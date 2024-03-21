@@ -88,6 +88,7 @@ const ComposeEmail: React.FC = () => {
               : "bg-red-100 border border-red-400 text-red-700"
           }`}
           onClick={() => setMessage(null)}
+          role="button"
         >
           {message.text}
         </div>
