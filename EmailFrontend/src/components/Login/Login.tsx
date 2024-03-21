@@ -38,7 +38,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
         const apiUrl = config.API_URL;
       //TODO: fix IP
       // Realizar la solicitud al servidor para autenticar al usuario
-      const response = await fetch(`${apiUrl}/login/`, {
+      const response = await fetch(`http://18.119.121.232:8000/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
