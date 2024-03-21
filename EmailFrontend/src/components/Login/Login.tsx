@@ -2,7 +2,6 @@
 import React, { useState } from "react"
 import { Popover, PopoverTrigger, PopoverContent, Button, Input } from "@nextui-org/react"
 
-import config from './config.json';
 
 
 const statusErrorMessages: Record<number, string> = {
@@ -35,7 +34,6 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
         return
       }
       //Recuerpa ip de json
-        const apiUrl = config.API_URL;
       //TODO: fix IP
       // Realizar la solicitud al servidor para autenticar al usuario
       const response = await fetch(`http://18.119.121.232:8000/login/`, {
