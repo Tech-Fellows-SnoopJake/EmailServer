@@ -9,13 +9,13 @@ urlpatterns = [
     path('user/<int:pk>/', views.UserDetailsAPI.as_view()),  # Endpoint to retrieve details of a specific user
     path('emails/', views.EmailAPI.as_view()),  # Endpoint to retrieve list of emails
     path('email/<int:pk>/', views.EmailDetailsAPI.as_view()),  # Endpoint to retrieve details of a specific email
-    path('mylist/<str:email>/', views.byEmail_APIView.as_view()),  # Endpoint to filter emails by receiver
-    path('sendlist/<str:email>/', views.bySend_APIView.as_view()),  # Endpoint to filter emails by sender
+    path('mylist/<str:email>/', views.ByEmailAPIView.as_view()),  # Endpoint to filter emails by receiver
+    path('sendlist/<str:email>/', views.BySendAPIView.as_view()),  # Endpoint to filter emails by sender
 ]
 
 # Define router for folders endpoint
 router = SimpleRouter()
-router.register('folders', views.Folders_APIView)
+router.register('folders', views.FoldersAPIView)
 
 # Add router URLs to urlpatterns
 urlpatterns += router.urls
