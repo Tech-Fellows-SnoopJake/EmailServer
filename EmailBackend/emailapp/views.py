@@ -212,7 +212,7 @@ class EmailDetailsAPI(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 # List of emails received per user
-class byEmail_APIView(APIView):
+class ByEmailAPIView(APIView):
     """
     API endpoint to retrieve a list of emails received per user.
     """
@@ -230,7 +230,7 @@ class byEmail_APIView(APIView):
             raise Http404
 
 # List of emails sent by user
-class bySend_APIView(APIView):
+class BySendAPIView(APIView):
     """
     API endpoint to retrieve a list of emails sent by user..
     """
@@ -248,7 +248,7 @@ class bySend_APIView(APIView):
             raise Http404
 
 # Folders C.R.U.D  Crazy rigth?!.
-class Folders_APIView(viewsets.ModelViewSet):
+class FoldersAPIView(viewsets.ModelViewSet):
     """
     API endpoint for Folder CRUD operations.
     """
