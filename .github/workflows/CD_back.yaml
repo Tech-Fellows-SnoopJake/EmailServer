@@ -48,6 +48,7 @@ jobs:
               -e DB_PASSWORD='${{ secrets.DB_PASSWORD }}' \
               -e DB_HOST='${{ secrets.DB_HOST }}' \
               -e DB_PORT='${{ secrets.DB_PORT }}' \
+              -e DJANGO_SECRET_KEY='${{ secrets.DJANGO_SECRET_KEY }}' \
               ghcr.io/homegroup0/${{ env.IMAGE_NAME }}:sha-${{ steps.vars.outputs.sha_short }}
             docker container prune -f
             docker image prune -a 
