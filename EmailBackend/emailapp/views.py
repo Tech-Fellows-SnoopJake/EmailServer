@@ -49,7 +49,6 @@ class UserDetailsAPI(APIView):
     """
     API endpoint for retrieving, updating, or deleting a specific user.
     """
-    @csrf_exempt
     def get_object(self, pk):
         """
         Get user object by primary key.
@@ -216,7 +215,6 @@ class ByEmailAPIView(APIView):
     """
     API endpoint to retrieve a list of emails received per user.
     """
-    @csrf_exempt
     def get(self, request, format=None, *args, **kwargs):
         """
         Retrieve a list of emails received per user.
@@ -234,7 +232,6 @@ class BySendAPIView(APIView):
     """
     API endpoint to retrieve a list of emails sent by user..
     """
-    @csrf_exempt
     def get(self, request, format=None, *args, **kwargs):
         """
         Retrieve a list of emails sent by user.
