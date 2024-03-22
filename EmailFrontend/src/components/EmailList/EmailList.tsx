@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {API_URL} from "../../utils/constants";
 
 interface Email {
@@ -18,14 +18,8 @@ interface EmailListProps {
 const EmailList = ({typeEmail}: EmailListProps) => {
     const [emails, setEmails] = useState<Email[]>([]);
 
-    const history = useNavigate();
     useEffect(() => {
             const fetchEmails = async () => {
-                const isAuthenticated = localStorage.getItem("username");
-                if (!isAuthenticated) {
-                    history("/login"); // Redirige al login si no está autenticado
-                    return;
-                }
 
                 const typeList = typeEmail === "inbox" ? "mylist" : "sendlist";
                 const receiverEmail = localStorage.getItem("username");
