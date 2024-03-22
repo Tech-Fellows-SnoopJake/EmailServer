@@ -48,7 +48,7 @@ describe("Register component", () => {
 
     //TODO: fix IP
     await waitFor(() => {
-      expect(fetchMock).toHaveBeenCalledWith(`API_URL/users/`, {
+      expect(fetchMock).toHaveBeenCalledWith(`${API_URL}/users/`, {
         // Ajusta la URL esperada aquí
         method: "POST",
         headers: { "Content-Type": "application/json" },
