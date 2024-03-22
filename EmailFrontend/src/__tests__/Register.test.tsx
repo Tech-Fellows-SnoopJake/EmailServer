@@ -1,6 +1,7 @@
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import Register from "../components/Register/Register";
 import fetchMock from "jest-fetch-mock";
+import { API_URL } from "../utils/constants.ts";
 
 beforeAll(() => {
   fetchMock.enableMocks();
@@ -47,7 +48,7 @@ describe("Register component", () => {
 
     //TODO: fix IP
     await waitFor(() => {
-      expect(fetchMock).toHaveBeenCalledWith("http://18.119.121.232:8000/users/", {
+      expect(fetchMock).toHaveBeenCalledWith(`${API_URL}/users/`, {
         // Ajusta la URL esperada aquí
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -76,7 +77,7 @@ describe("Register component", () => {
 
     //TODO: fix IP
     await waitFor(() => {
-      expect(fetchMock).toHaveBeenCalledWith("http://18.119.121.232:8000/users/", {
+      expect(fetchMock).toHaveBeenCalledWith(`${API_URL}/users/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

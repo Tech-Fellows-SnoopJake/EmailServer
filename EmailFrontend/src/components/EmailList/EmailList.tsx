@@ -1,6 +1,7 @@
 import  { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { API_URL } from "../../utils/constants";
 
 interface Email {
   id: number;
@@ -16,8 +17,6 @@ interface EmailListProps {
 
 const EmailList = ({ typeEmail }: EmailListProps) => {
   const [emails, setEmails] = useState<Email[]>([]);
-//TODO fix IP
-  const API_URL = "http://18.119.121.232:8000";
 
   useEffect(() => {
     const fetchEmails = async () => {

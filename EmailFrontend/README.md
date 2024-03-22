@@ -37,3 +37,8 @@ To run the `Vite` live development server, please run the dev script with:
 npm run dev
 ```
 
+
+## G0 Feature change:
+
+- adding const to easy change of IP. We had problems with the use of environment vars, so is discarded for now. 
+- Logout works in a simple way. 

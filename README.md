@@ -44,6 +44,8 @@ This begins here.
     - Needed execution permissions `chmod +x namefile`
   - Set the RDS Instance as public
     - Connection done. Set acl 5432
+  - Setting IP as variable
+    - VITE_REACT_API_URL: ${{ env.VITE_REACT_API_URL }} and a .env file.
 
 > [!IMPORTANT]
 > We need to set the host of the DB, and de host of the EC2 every time that restart the instances.
