@@ -1,7 +1,7 @@
 // src/Login.tsx
 import React, { useState } from "react"
 import { Popover, PopoverTrigger, PopoverContent, Button, Input } from "@nextui-org/react"
-import { API_URL } from "../../utils/constants.ts";
+import { API_URL } from "../../utils/constants";
 
 const statusErrorMessages: Record<number, string> = {
   400: "Error de Login: Solicitud incorrecta",
