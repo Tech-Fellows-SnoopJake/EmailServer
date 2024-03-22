@@ -64,6 +64,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
       if (status && status in statusErrorMessages) {
         console.error(statusErrorMessages[status])
       } else {
+        console.log(API_URL)
         console.error("Error de Login")
       }
     }
