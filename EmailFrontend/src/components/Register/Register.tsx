@@ -11,7 +11,6 @@ const statusErrorMessages: Record<number, string> = {
 
 const Register = () => {
   const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -25,17 +24,17 @@ const Register = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ username, email, password })
+        body: JSON.stringify({ username, password })
       });
 
       // Verificar si el registro fue exitoso
       if (response.ok) {
         const data = await response.json();
         // Almacenar el token JWT en el localStorage o en las cookies si es necesario
-        localStorage.setItem('token', data.token);
+        localStorage.setItem('userToken', data.token);
         // Redireccionar al usuario a la página de inicio después del registro
         if (process.env.NODE_ENV === 'production') {
-          window.location.href = '/home';
+          window.location.href = '/home'; // /home o /
         }
       } else {
         // Mostrar un mensaje de error si el registro falla
@@ -62,12 +61,6 @@ const Register = () => {
             label="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-          />
-          <h2>Email</h2>
-          <Input
-            label="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
           />
           <h2>Password</h2>
           <Input

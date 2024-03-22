@@ -28,9 +28,8 @@ function App() {
 
   // Assuming you have a way to check if the user is logged in
   const isLoggedIn = () => {
-    // Check login status, for now, let's assume a simple check
-    // This should eventually check actual authentication status
-    return !!localStorage.getItem("userLoggedIn") // Example check
+    // Check if there are any jwt tokens in local storage
+    return !!localStorage.getItem("userToken")
   }
 
   return (
@@ -40,7 +39,8 @@ function App() {
           path="/login"
           element={<Login onLoginSuccess={handleLoginSuccess} />}
         />
-        <Route path="register" element={<Register />} />
+        <Route path="/register" element={<Register />} />
+        
         {/* Redirect from root to either Login or Inbox based on login status */}
         <Route
           path="/"
@@ -48,7 +48,9 @@ function App() {
             isLoggedIn() ? <Navigate to="/inbox" /> : <Navigate to="/login" />
           }
         />
+
         {/* Layout route for authenticated users */}
+
         <Route path="/" element={<Layout setListType={setListType}/>}>
           <Route path="inbox" element={<EmailList typeEmail={listType} />} />
           <Route path="sent" element={<EmailList typeEmail={listType} />} />
@@ -64,11 +66,12 @@ function App() {
 interface LayoutProps {
   setListType: React.Dispatch<React.SetStateAction<string>>
 }
+
 // Component to wrap the layout with Header and Sidebar
 const Layout = ( {setListType} : LayoutProps) => (
   <>
     <Header />
-    <div className="main-container flex ">
+    <div className="main-container flex">
       <Sidebar setListType={setListType}/>
       <div className="content-area grow p-5 overflow-y-auto ">
         {/* Outlet will render the nested route components */}
