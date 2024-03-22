@@ -1,7 +1,7 @@
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import Register from "../components/Register/Register";
 import fetchMock from "jest-fetch-mock";
-import { API_URL } from "../../utils/constants.ts";
+import { API_URL } from "../utils/constants.ts";
 
 beforeAll(() => {
   fetchMock.enableMocks();
