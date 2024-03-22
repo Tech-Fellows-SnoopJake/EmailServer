@@ -1,27 +1,38 @@
 from django.db import models
 
 from emailprototype.settings import FAKE_DOMAIN
-
+from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
 
 # models here test
-class User(models.Model):
-    """
-    Represents a user of the email system.
 
-    Attributes:
-        username (CharField): The username of the user, must be unique and limited to 30 characters.
-        password (CharField): The password of the user, limited to 30 characters.
-        created_at (DateTimeField): The date and time when the user was created.
+class User(AbstractUser):
     """
-    username = models.CharField(null=False, max_length=30, unique=True)
-    password = models.CharField(null=False, max_length=30)
-    created_at = models.DateTimeField(auto_now_add=True)
+    Represents a user of the email system with custom logic.
+    """
+    
+    def clean(self):
+        """
+        Custom model validation to ensure both username and password are provided.
+        """
+        super().clean()
+
+        if not self.username:
+            raise ValidationError({'username': ['This field is required.']})
+
+        if not self.password:
+            raise ValidationError({'password': ['This field is required.']})
+
     def save(self, *args, **kwargs):
         """
-        Overrides the save method to normalize the username to lowercase and concatenate FAKE_DOMAIN to it before saving.
+        Overrides the save method to customize user saving logic.
         """
-        self.username = self.username.lower() + FAKE_DOMAIN
+        if not self.pk:  # Check if it's a new user to avoid modifying existing usernames
+            self.username = self.username.lower() + FAKE_DOMAIN
+            self.email = self.username  # Assuming username is the email address
+
         super(User, self).save(*args, **kwargs)
+
 
 class Folder(models.Model):
     """
@@ -32,7 +43,8 @@ class Folder(models.Model):
         user (ForeignKey): Relation to the User model, establishing a relationship between folders and users.
     """
     name = models.CharField(max_length=50)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='folders')
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='folders')
 
 
 class Email(models.Model):
@@ -48,7 +60,8 @@ class Email(models.Model):
         folder (ForeignKey): Relation to the Folder model, indicating the folder where this email is stored.
         created_at (DateTimeField): The date and time when the email was created.
     """
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='emails')
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='emails')
     receiver = models.EmailField(null=False)
     sender = models.EmailField(null=False)
     subject = models.CharField(max_length=50)
@@ -56,7 +69,7 @@ class Email(models.Model):
     folder = models.ForeignKey(Folder, on_delete=models.SET_NULL, null=True, blank=True,
                                related_name='emails')  # // [Inbox] (if is null!))
     created_at = models.DateTimeField(auto_now_add=True)
-    
+
     def save(self, *args, **kwargs):
         """
         Overrides the save method to normalize sender and receiver email addresses to lowercase before saving.

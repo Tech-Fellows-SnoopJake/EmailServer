@@ -9,7 +9,7 @@ This document provides documentation for the database migrated from a Django app
 ## 3. Tables
 
 ### 3.1. User
-- **Description**: Represents a user in the system.
+- **Description**: Represents a user in the system.Extends from base django User
 - **Columns**:
   - `id`: Primary Key, Auto-incremented integer.
   - `username`: CharField. The username of the user, unique, and limited to 30 characters.
