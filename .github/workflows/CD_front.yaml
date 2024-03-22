@@ -39,5 +39,5 @@ jobs:
             ls -la
             docker run -d -p ${{ env.PORT }}:80 ghcr.io/homegroup0/${{ env.IMAGE_NAME}}:sha-${{ steps.vars.outputs.sha_short }}
             docker container prune -f
-            docker image prune -a 
+            docker image prune -a -f
           EOF
