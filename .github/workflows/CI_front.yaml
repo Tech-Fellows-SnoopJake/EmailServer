@@ -21,7 +21,7 @@ jobs:
       security-events: write  # This permission is added for SonarCloud analysis
 
     env:
-      VITE_REACT_API_URL: {{ secrets.VITE_REACT_API_URL }}
+      VITE_REACT_API_URL: ${{ secrets.VITE_REACT_API_URL }}
 
     steps:
       - name: Checkout repository
@@ -66,7 +66,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         env:
-          VITE_REACT_API_URL: {{ env.VITE_REACT_API_URL }}
+          VITE_REACT_API_URL: ${{ env.VITE_REACT_API_URL }}
         with:
           context: ./EmailFrontend
           push: true
