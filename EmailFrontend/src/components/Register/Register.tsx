@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Input } from '@nextui-org/react';
+import { API_URL } from "../../utils/constants.ts";
 
 const statusErrorMessages: Record<number, string> = {
   400: "Error de registro: Solicitud incorrecta",
@@ -19,7 +20,7 @@ const Register = () => {
     try {
       //TODO: fix IP
       // Realizar la solicitud al servidor para registrar al usuario
-      const response = await fetch('http://18.119.121.232:8000/users/', {
+      const response = await fetch(`${API_URL}/users/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
