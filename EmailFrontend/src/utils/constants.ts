@@ -1,2 +1,3 @@
 require('dotenv').config();
-export const API_URL = import.meta.env.VITE_REACT_API_URL
+// src/config.ts
+export const API_URL = import.meta.env.VITE_REACT_API_URL || 'http://localhost:8000';
