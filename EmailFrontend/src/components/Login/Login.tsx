@@ -34,7 +34,6 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
       }
 
       //Recuerpa ip de json
-      //TODO: fix IP
       // Realizar la solicitud al servidor para autenticar al usuario
       const response = await fetch(`${API_URL}/login/`, {
         method: "POST",
