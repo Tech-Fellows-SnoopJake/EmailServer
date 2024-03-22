@@ -249,6 +249,16 @@ class FoldersAPIView(viewsets.ModelViewSet):
     """
     API endpoint for Folder CRUD operations.
     """
-    queryset = Folder.objects.all()
+    
     serializer_class = FolderSerializer
+    def get_queryset(self):
+        """
+        Optionally restricts the returned folders to a given user,
+        by filtering against a `user_id` query parameter in the URL.
+        """
+        queryset = Folder.objects.all()
+        user_id = self.request.query_params.get('user_id')
+        if user_id is not None:
+            queryset = queryset.filter(user__id=user_id)
+        return queryset
     
