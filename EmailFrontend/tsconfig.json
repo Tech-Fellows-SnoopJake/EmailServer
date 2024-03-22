@@ -5,7 +5,7 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "types": ["jest", "@testing-library/jest-dom"],
+    "types": ["jest", "@testing-library/jest-dom", "node"], //node adding
 
     /* Bundler mode */
     "moduleResolution": "bundler",
