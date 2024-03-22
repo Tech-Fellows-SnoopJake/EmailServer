@@ -38,6 +38,7 @@ jobs:
       - name: Set en variable IP
         run: --build-arg VITE_REACT_API_URL=${{ secret.VITE_REACT_API_URL }}
 
+
      # - name: Run tests
       #  run: npm test -- --coverage
       #  working-directory: ./EmailFrontend
