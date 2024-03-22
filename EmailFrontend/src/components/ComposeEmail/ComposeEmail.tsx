@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import ReactQuill from "react-quill"
 import "react-quill/dist/quill.snow.css"
 import axios from "axios"
+import { API_URL } from "../../utils/constants.ts";
 
 function getErrorMessage(status: number): string {
   switch (status) {
@@ -37,7 +38,7 @@ const ComposeEmail: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
   //TODO: fix api
-    const apiUrl = "http://18.119.121.232:8000/emails/" //
+    const apiUrl = `${API_URL}/emails/` //
     const emailData = {
       receiver,
       subject,
@@ -88,6 +89,7 @@ const ComposeEmail: React.FC = () => {
               : "bg-red-100 border border-red-400 text-red-700"
           }`}
           onClick={() => setMessage(null)}
+          role="button"
         >
           {message.text}
         </div>

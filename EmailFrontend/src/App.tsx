@@ -3,6 +3,7 @@ import {
   Routes,
   Route,
   Navigate,
+  Outlet,
 } from "react-router-dom"
 import Header from "./components/Header/Header"
 import Sidebar from "./components/Sidebar/Sidebar"
@@ -11,7 +12,6 @@ import EmailDetail from "./components/EmailDetail/EmailDetail"
 import ComposeEmail from "./components/ComposeEmail/ComposeEmail"
 import Login from "./components/Login/Login"
 import Register from "./components/Register/Register"
-import { Outlet } from "react-router-dom"
 import { useState } from "react"
 
 const handleLoginSuccess = () => {

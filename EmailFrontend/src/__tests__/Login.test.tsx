@@ -1,6 +1,7 @@
 import { render,fireEvent,waitFor,act} from '@testing-library/react';
 import Login from '../components/Login/Login';
 import fetchMock from 'jest-fetch-mock';
+import { API_URL } from "../../utils/constants.ts";
 
 beforeAll(() => {
   fetchMock.enableMocks();
@@ -54,7 +55,7 @@ describe('Login component', () => {
     fireEvent.click(loginButton);
 //TODO: fix IP
     await waitFor(() => {
-      expect(fetchMock).toHaveBeenCalledWith('http://18.119.121.232:8000/login/', {
+      expect(fetchMock).toHaveBeenCalledWith(`${API_URL}/login/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: 'test@example.com', password: 'brHTAITnNdYmIyJ' }),
