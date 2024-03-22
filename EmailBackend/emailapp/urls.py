@@ -15,7 +15,7 @@ urlpatterns = [
 
 # Define router for folders endpoint
 router = SimpleRouter()
-router.register('folders', views.FoldersAPIView)
+router.register('folders', views.FoldersAPIView, basename='folder')
 
 # Add router URLs to urlpatterns
 urlpatterns += router.urls
