@@ -1,8 +1,7 @@
 // src/Login.tsx
 import React, { useState } from "react"
 import { Popover, PopoverTrigger, PopoverContent, Button, Input } from "@nextui-org/react"
-
-
+import { API_URL } from "../../utils/constants.ts";
 
 const statusErrorMessages: Record<number, string> = {
   400: "Error de Login: Solicitud incorrecta",
@@ -33,12 +32,11 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
         setErrorMessage("Por favor, introduce un correo electrónico válido.")
         return
       }
-      const fs = require('../../config.json');
-      const config = JSON.parse(fs);
+
       //Recuerpa ip de json
       //TODO: fix IP
       // Realizar la solicitud al servidor para autenticar al usuario
-      const response = await fetch(`${config.API_URL}/login/`, {
+      const response = await fetch(`${API_URL}/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
