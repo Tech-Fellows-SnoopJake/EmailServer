@@ -82,6 +82,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
         console.error("Error de Login")
       }
     }
+  }
 
   return (
     <div className="login-bg  h-screen bg-gradient-to-r from-[#4b61a6] from-0% via-[#4b61a6] via-50% to-[#afb7cf] to-100% flex flex-row  items-center justify-center">
