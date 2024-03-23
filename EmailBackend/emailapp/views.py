@@ -97,12 +97,32 @@ class UserDetailsAPI(APIView):
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+class UserTokenAPI(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        serializer = UserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class MyTokenObtainPairView(TokenObtainPairView):
     """
     API endpoint for user login
     """
     serializer_class = MyTokenObtainPairSerializer
+
+class ValidateTokenAPI(APIView):
+    """
+    API endpoint for validating token, used to check if the token is still valid, if it is, the user is still logged in.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        """
+        Validate the token
+        """
+        return Response(status=status.HTTP_200_OK)
 
 
 class LogoutAPIView(APIView):

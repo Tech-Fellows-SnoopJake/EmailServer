@@ -16,8 +16,14 @@ Here's a summary of the API endpoints and their functionalities:
 - **PUT** `http://localhost:8000/user/<user_id>/`: Updates user details. Expects a JSON object with username and password.
 - **DELETE** `http://localhost:8000/user/<user_id>/`: Deletes a user by ID.
 
+*Get User Data from JWT Token*
+- **GET** `http://localhost:8000/user/token/`: Retrieves user details by JWT.
+
 *User Login*
 - **POST** `http://localhost:8000/login/`: Allows users to log in. Expects a JSON object with username and password. The server returns a JWT token, which can be used to authorize subsequent requests. The token should be included in the Authorization header of subsequent requests as a Bearer token.
+
+*User Logout*
+- **POST** `http://localhost:8000/logout/`: Allows users to log out. Expects a JSON object with the refresh token. Which will be blacklisted.
 
 **Emails**
 
