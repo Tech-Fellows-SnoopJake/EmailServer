@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="12" failures="0" errors="0" time="5.993">
-  <testsuite name="EmailDetail component" errors="0" failures="0" skipped="0" timestamp="2024-03-01T23:40:25" time="3.917" tests="1">
-    <testcase classname="EmailDetail component renders &quot;Email not found&quot; message when no email data is provided" name="EmailDetail component renders &quot;Email not found&quot; message when no email data is provided" time="0.037">
+<testsuites name="jest tests" tests="12" failures="0" errors="0" time="14.406">
+  <testsuite name="EmailList" errors="0" failures="0" skipped="0" timestamp="2024-03-23T17:06:58" time="10.219" tests="2">
+    <testcase classname="EmailList renders empty list message when no emails are present" name="EmailList renders empty list message when no emails are present" time="0.094">
+    </testcase>
+    <testcase classname="EmailList handles errors during email fetching" name="EmailList handles errors during email fetching" time="0.021">
     </testcase>
   </testsuite>
-  <testsuite name="EmailList" errors="0" failures="0" skipped="0" timestamp="2024-03-01T23:40:25" time="3.944" tests="2">
-    <testcase classname="EmailList renders empty list message when no emails are present" name="EmailList renders empty list message when no emails are present" time="0.048">
-    </testcase>
-    <testcase classname="EmailList handles errors during email fetching" name="EmailList handles errors during email fetching" time="0.008">
+  <testsuite name="EmailDetail component" errors="0" failures="0" skipped="0" timestamp="2024-03-23T17:06:58" time="10.151" tests="1">
+    <testcase classname="EmailDetail component renders &quot;Email not found&quot; message when no email data is provided" name="EmailDetail component renders &quot;Email not found&quot; message when no email data is provided" time="0.1">
     </testcase>
   </testsuite>
-  <testsuite name="Sidebar component" errors="0" failures="0" skipped="0" timestamp="2024-03-01T23:40:25" time="4.802" tests="1">
-    <testcase classname="Sidebar component should render links with correct URLs" name="Sidebar component should render links with correct URLs" time="0.067">
+  <testsuite name="Sidebar component" errors="0" failures="0" skipped="0" timestamp="2024-03-23T17:06:58" time="11.951" tests="1">
+    <testcase classname="Sidebar component should render links with correct URLs" name="Sidebar component should render links with correct URLs" time="0.157">
     </testcase>
   </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2024-03-01T23:40:25" time="4.909" tests="1">
-    <testcase classname=" Renders the main page" name=" Renders the main page" time="0.13">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2024-03-23T17:06:58" time="12.16" tests="1">
+    <testcase classname=" Renders the main page" name=" Renders the main page" time="0.202">
     </testcase>
   </testsuite>
-  <testsuite name="Register component" errors="0" failures="0" skipped="0" timestamp="2024-03-01T23:40:25" time="4.922" tests="3">
-    <testcase classname="Register component allows user to input username, email, and password" name="Register component allows user to input username, email, and password" time="0.139">
+  <testsuite name="Register component" errors="0" failures="0" skipped="0" timestamp="2024-03-23T17:06:58" time="12.126" tests="3">
+    <testcase classname="Register component allows user to input username, email, and password" name="Register component allows user to input username, email, and password" time="0.237">
     </testcase>
-    <testcase classname="Register component submits registration form correctly" name="Register component submits registration form correctly" time="0.086">
+    <testcase classname="Register component submits registration form correctly" name="Register component submits registration form correctly" time="0.2">
     </testcase>
-    <testcase classname="Register component handles registration errors correctly" name="Register component handles registration errors correctly" time="0.097">
+    <testcase classname="Register component handles registration errors correctly" name="Register component handles registration errors correctly" time="0.09">
     </testcase>
   </testsuite>
-  <testsuite name="Login component" errors="0" failures="0" skipped="0" timestamp="2024-03-01T23:40:25" time="4.954" tests="4">
-    <testcase classname="Login component renders without crashing" name="Login component renders without crashing" time="0.077">
+  <testsuite name="Login component" errors="0" failures="0" skipped="0" timestamp="2024-03-23T17:06:58" time="12.314" tests="4">
+    <testcase classname="Login component renders without crashing" name="Login component renders without crashing" time="0.183">
     </testcase>
-    <testcase classname="Login component allows user to input email and password" name="Login component allows user to input email and password" time="0.061">
+    <testcase classname="Login component allows user to input email and password" name="Login component allows user to input email and password" time="0.145">
     </testcase>
-    <testcase classname="Login component submits login form correctly" name="Login component submits login form correctly" time="0.16">
+    <testcase classname="Login component submits login form correctly" name="Login component submits login form correctly" time="0.306">
     </testcase>
-    <testcase classname="Login component handles login errors correctly" name="Login component handles login errors correctly" time="0.094">
+    <testcase classname="Login component handles login errors correctly" name="Login component handles login errors correctly" time="0.095">
     </testcase>
   </testsuite>
 </testsuites>

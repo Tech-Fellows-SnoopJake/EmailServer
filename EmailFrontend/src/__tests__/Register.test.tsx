@@ -15,15 +15,12 @@ describe("Register component", () => {
   test("allows user to input username, email, and password", () => {
     const { getByLabelText } = render(<Register />);
     const usernameInput = getByLabelText("Username") as HTMLInputElement;
-    const emailInput = getByLabelText("Email") as HTMLInputElement;
     const passwordInput = getByLabelText("Password") as HTMLInputElement;
 
     fireEvent.change(usernameInput, { target: { value: "testuser" } });
-    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
     fireEvent.change(passwordInput, { target: { value: "password123" } });
 
     expect(usernameInput.value).toBe("testuser");
-    expect(emailInput.value).toBe("test@example.com");
     expect(passwordInput.value).toBe("password123");
   });
   test("submits registration form correctly", async () => {
@@ -37,16 +34,13 @@ describe("Register component", () => {
 
     const { getByLabelText, getByText } = render(<Register />);
     const usernameInput = getByLabelText("Username");
-    const emailInput = getByLabelText("Email");
     const passwordInput = getByLabelText("Password");
     const registerButton = getByText("Create account");
 
     fireEvent.change(usernameInput, { target: { value: "testuser" } });
-    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
     fireEvent.change(passwordInput, { target: { value: "password123" } });
     fireEvent.click(registerButton);
 
-    //TODO: fix IP
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalledWith(`${API_URL}/users/`, {
         // Ajusta la URL esperada aquí
@@ -54,7 +48,6 @@ describe("Register component", () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           username: "testuser",
-          email: "test@example.com",
           password: "password123",
         }),
       });
@@ -66,23 +59,19 @@ describe("Register component", () => {
     const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
     const { getByLabelText, getByText } = render(<Register />);
     const usernameInput = getByLabelText("Username");
-    const emailInput = getByLabelText("Email");
     const passwordInput = getByLabelText("Password");
     const registerButton = getByText("Create account");
 
     fireEvent.change(usernameInput, { target: { value: "testuser" } });
-    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
     fireEvent.change(passwordInput, { target: { value: "password123" } });
     fireEvent.click(registerButton);
 
-    //TODO: fix IP
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalledWith(`${API_URL}/users/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           username: "testuser",
-          email: "test@example.com",
           password: "password123",
         }),
       });
