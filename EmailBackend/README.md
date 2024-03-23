@@ -65,14 +65,15 @@ Docker's update and installation.
 - Migrations are automated with a .sh file and a *RUN* task in the Docker file. This should work on the first deployment. 
 Otherwise, a first `python manage.py makemigrations emailapp` and `python manage.py migrate` must be done.
 - Proper format of best practices for variable and class names in the .py files has been applied.
-
+- New path API.
+- 
 ### Special Considerations
 
 - The GHCR path of the user, which is commented, and the EC2 instance need to be changed.
 - Environment variables for database access need to be set.
 - An RDS for MySql with ACL for MySql, SSH, and HTTP needs to be deployed.
 - Update the EC2_SSH_KEY for SSH connection.
-- For the docker group permissions to the ubuntu user to take effect, relogging is necessary.
+- For the docker group permissions to the ubuntu user to take effect, **relogging is necessary**.
 - If changes are made to the Database Schema, conflicts with migrations and the stored cache should be considered.
 
 ### Resources

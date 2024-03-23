@@ -16,12 +16,15 @@ describe("Register component", () => {
     const { getByLabelText } = render(<Register />);
     const usernameInput = getByLabelText("Username") as HTMLInputElement;
     const passwordInput = getByLabelText("Password") as HTMLInputElement;
+    const password2Input = getByLabelText("Password2") as HTMLInputElement;
 
     fireEvent.change(usernameInput, { target: { value: "testuser" } });
     fireEvent.change(passwordInput, { target: { value: "password123" } });
+    fireEvent.change(password2Input, { target: { value: "password123" } });
 
     expect(usernameInput.value).toBe("testuser");
     expect(passwordInput.value).toBe("password123");
+    expect(password2Input.value).toBe("password123");
   });
   test("submits registration form correctly", async () => {
     const mockResponse = { token: "mockToken" };
@@ -35,10 +38,12 @@ describe("Register component", () => {
     const { getByLabelText, getByText } = render(<Register />);
     const usernameInput = getByLabelText("Username");
     const passwordInput = getByLabelText("Password");
+    const password2Input = getByLabelText("Password2");
     const registerButton = getByText("Create account");
 
     fireEvent.change(usernameInput, { target: { value: "testuser" } });
     fireEvent.change(passwordInput, { target: { value: "password123" } });
+    fireEvent.change(password2Input, { target: { value: "password123" } });
     fireEvent.click(registerButton);
 
     await waitFor(() => {
@@ -60,10 +65,12 @@ describe("Register component", () => {
     const { getByLabelText, getByText } = render(<Register />);
     const usernameInput = getByLabelText("Username");
     const passwordInput = getByLabelText("Password");
+    const password2Input = getByLabelText("Password2");
     const registerButton = getByText("Create account");
 
     fireEvent.change(usernameInput, { target: { value: "testuser" } });
     fireEvent.change(passwordInput, { target: { value: "password123" } });
+    fireEvent.change(password2Input, { target: { value: "password123" } });
     fireEvent.click(registerButton);
 
     await waitFor(() => {
