@@ -50,11 +50,22 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
       if (response.ok) {
         const data = await response.json()
         // Almacenar el token JWT en el localStorage o en las cookies
-        localStorage.setItem("id", data.id)
-        localStorage.setItem("username", data.username)
-
         localStorage.setItem("jwtToken", data.access)
         localStorage.setItem("refreshToken", data.refresh)
+
+        const userResponse = await fetch(`${API_URL}/user/token`, {
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${data.access}`
+          }
+        })
+
+        if (userResponse.ok) {
+          const userData = await userResponse.json()
+          localStorage.setItem("id", userData.id)
+          localStorage.setItem("username", userData.username)
+        }
+
         // Redireccionar al usuario a la página de inicio, por ejemplo
         onLoginSuccess()
       } else {
