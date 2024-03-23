@@ -10,7 +10,17 @@ class UserSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = User
-        fields = ["id", "username", "date_joined"]
+        #fields = ["id", "username", "date_joined"]
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        # Customize the representation to include only specific fields
+        return {
+            'id': representation['id'],
+            'username': representation['username'],
+            'date_joined': representation['date_joined']
+        }
 
     def create(self, validated_data):
         user = User.objects.create(
