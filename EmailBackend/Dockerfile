@@ -25,7 +25,7 @@ RUN pip install -r requirements.txt
 COPY . .
 
 #Migrate Tables
-RUN python manage.py makemigrations emailapp
+
 RUN python manage.py migrate
 
 EXPOSE 8000
