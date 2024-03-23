@@ -48,10 +48,13 @@ const ComposeEmail: React.FC = () => {
     }
 
     try {
+      // Get the JWT token from local storage
+      const jwtToken = localStorage.getItem('jwtToken');
+      
       const response = await axios.post(apiUrl, emailData, {
         headers: {
           "Content-Type": "application/json",
-          //localStorage.getItem("token", data.token);
+          "Authorization": `Bearer ${jwtToken}`
         },
       })
 
