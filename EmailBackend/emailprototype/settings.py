@@ -89,11 +89,11 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
     # Lifetime of the access token. After this duration, the access token expires
     # and the user needs to re-authenticate to obtain a new one.
 
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
     # Lifetime of the refresh token. After this duration, the refresh token expires
     # and the user needs to perform a full login to obtain new tokens.
 
