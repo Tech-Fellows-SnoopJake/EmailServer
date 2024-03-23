@@ -38,7 +38,6 @@ jobs:
         run: npm install
         working-directory: ./EmailFrontend
 
-
       - name: Run tests
         run: npm test -- --coverage
         working-directory: ./EmailFrontend
