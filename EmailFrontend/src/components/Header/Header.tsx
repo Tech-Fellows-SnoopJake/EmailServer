@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; 
 import iconSvg from '../../assets/avatar.svg';
+import { API_URL } from '../../utils/constants';
 
 const Header: React.FC = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -9,16 +10,23 @@ const Header: React.FC = () => {
     const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
     //Logout function
-    const handleLogout = () => {
-  // Limpia el localStorage o las cookies, según sea necesario
-  localStorage.removeItem("id");
-  localStorage.removeItem("username");
+    const handleLogout = async () => {
+      // Limpia el localStorage o las cookies, según sea necesario
+      localStorage.removeItem("id");
+      localStorage.removeItem("username");
 
-  window.location.href = "/login";
+      await fetch(`${API_URL}/logout/`, {
+        method: "POST",
+        body: JSON.stringify({ refresh: localStorage.getItem("refreshToken") }),
+      });
 
-  // Si estás usando un router como react-router-dom, podrías hacer:
-  // history.push('/login');
-};
+      localStorage.removeItem("jwtToken");
+      localStorage.removeItem("refreshToken");
+
+      window.location.href = "/login";
+      // Si estás usando un router como react-router-dom, podrías hacer:
+      // history.push('/login');
+    };
   
     return (
       <header className="header flex justify-between bg-[#274073] p-6 text-[#f2f2f2]  font-poppins">

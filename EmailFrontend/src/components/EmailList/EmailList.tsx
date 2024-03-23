@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {API_URL} from "../../utils/constants";
 
 interface Email {
@@ -18,20 +18,26 @@ interface EmailListProps {
 const EmailList = ({typeEmail}: EmailListProps) => {
     const [emails, setEmails] = useState<Email[]>([]);
 
-    const history = useNavigate();
     useEffect(() => {
             const fetchEmails = async () => {
-                const isAuthenticated = localStorage.getItem("username");
-                if (!isAuthenticated) {
-                    history("/login"); // Redirige al login si no está autenticado
-                    return;
-                }
 
                 const typeList = typeEmail === "inbox" ? "mylist" : "sendlist";
                 const receiverEmail = localStorage.getItem("username");
 
                 try {
-                    const response = await axios.get(`${API_URL}/${typeList}/${receiverEmail}/`);
+                    // Get the JWT token from local storage
+                    const jwtToken = localStorage.getItem('jwtToken');
+                                    
+                    // Set up axios with Authorization header
+                    const axiosConfig = {
+                      headers: {
+                        Authorization: `Bearer ${jwtToken}`
+                      }
+                    };
+                    
+                    // Make the GET request with axios
+                    const response = await axios.get(`${API_URL}/${typeList}/${receiverEmail}/`, axiosConfig);
+
                     setEmails(Array.isArray(response.data) ? response.data : []);
                 } catch (error) {
                     //error handling

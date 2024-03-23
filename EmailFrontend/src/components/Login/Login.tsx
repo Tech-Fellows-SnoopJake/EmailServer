@@ -1,22 +1,23 @@
 // src/Login.tsx
-import React, { useState } from "react"
-import { Popover, PopoverTrigger, PopoverContent, Button, Input } from "@nextui-org/react"
-import { API_URL } from "../../utils/constants";
+import React,{useState} from "react"
+import {Popover,PopoverTrigger,PopoverContent,Button,Input} from "@nextui-org/react"
+import {API_URL} from "../../utils/constants";
 
-const statusErrorMessages: Record<number, string> = {
-  400: "Error de Login: Solicitud incorrecta",
-  401: "Error de Login: No autorizado",
-  404: "Error de Login: Recurso no encontrado",
-  500: "Error de Login: Error interno del servidor",
+const statusErrorMessages: Record<number,string> = {
+    400: "Error de Login: Solicitud incorrecta",
+    401: "Error de Login: No autorizado",
+    404: "Error de Login: Recurso no encontrado",
+    500: "Error de Login: Error interno del servidor",
 }
 
 interface LoginProps {
-  onLoginSuccess: () => void
+    onLoginSuccess: () => void
 }
+
 //TODO: fix and adapt when register ok.
 const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("brHTAITnNdYmIyJ")
+  const [password, setPassword] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
 
   const validateEmail = (email: string): boolean => {
@@ -50,8 +51,22 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
       if (response.ok) {
         const data = await response.json()
         // Almacenar el token JWT en el localStorage o en las cookies
-        localStorage.setItem("id", data.id)
-        localStorage.setItem("username", data.username)
+        localStorage.setItem("jwtToken", data.access)
+        localStorage.setItem("refreshToken", data.refresh)
+
+        const userResponse = await fetch(`${API_URL}/user/token`, {
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${data.access}`
+          }
+        })
+
+        if (userResponse.ok) {
+          const userData = await userResponse.json()
+          localStorage.setItem("id", userData.id)
+          localStorage.setItem("username", userData.username)
+        }
+
         // Redireccionar al usuario a la página de inicio, por ejemplo
         onLoginSuccess()
       } else {
@@ -83,10 +98,9 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
             value={username}
             onChange={(e) => {
               setUsername(e.target.value)
-              setPassword(password)
             }}
           />
-          <Input label="password"  value={"brHTAITnNdYmIyJ"} className="hidden"/>
+          <Input type="password" label="password"  value={password} onChange={(e) => {setPassword(e.target.value)}}/>
           <Popover placement="right">
             <PopoverTrigger>
               <Button color="default" onClick={handleLogin}>
