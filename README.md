@@ -20,33 +20,13 @@ Each of these `front` and `back` repos contain their respectives `README` files 
 
 Cheers!
 
-## HG 02 Improvements
+[README Back](../EmailServer/EmailBackend/README.md)
 
-This begins here.
+[REAME Front](../EmailServer/EmailFrontend/README.md)
 
-- Sonar configuration.
-- First test.
-  - changes in EC2 id, and versión of action. -v to debug.
-  - ~~Set up instance EC2 as Secrets~~
-  - New try with the instance on code
-    - sudo apt-get update
-      sudo apt-get install docker.io
-    - sudo usermod -aG docker ubuntu
-  - Change in ssh routes of command in front and back.
-    - ~~add line to login docker GHCR~~
-    - Login direct GHCR from EC2 intance
-  - set Var BD schema
-    - test_jake
-    - postgres
-    - JPy5jKpp
-  - change without sudo.
-  - Set files envVars and detener\*
-    - Needed execution permissions `chmod +x namefile`
-  - Set the RDS Instance as public
-    - Connection done. Set acl 5432
-  - Setting IP as variable
-    - VITE_REACT_API_URL: ${{ env.VITE_REACT_API_URL }} and a .env file.
+## PR **HG 02 Improvements**
 
-> [!IMPORTANT]
-> We need to set the host of the DB, and de host of the EC2 every time that restart the instances.
-> In CD front y back and change the host DB int the file of envVars.txt into the EC2 Instance.
+After inheriting and thoroughly reviewing the code for this project, we've made some updates that can be reviewed in the 
+PR. We've cleaned up the code, made it easier to read and work with, improve security, and polished the user interface for 
+a smoother experience.
+
