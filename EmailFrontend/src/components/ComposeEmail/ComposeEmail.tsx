@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import ReactQuill from "react-quill"
 import "react-quill/dist/quill.snow.css"
 import axios from "axios"
-import { API_URL } from "../../utils/constants.ts";
+import { API_URL } from "../../utils/constants";
 
 function getErrorMessage(status: number): string {
   switch (status) {

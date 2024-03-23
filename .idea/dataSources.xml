@@ -12,7 +12,7 @@
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://bd-mysql-sj.cxwawmisoa5q.us-east-2.rds.amazonaws.com:3306/mysql_sj</jdbc-url>
+      <jdbc-url>jdbc:mysql://db-sj.cxwawmisoa5q.us-east-2.rds.amazonaws.com:3306/mysql_sj</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Input } from '@nextui-org/react';
-import { API_URL } from "../../utils/constants.ts";
+import { API_URL } from "../../utils/constants";
 
 const statusErrorMessages: Record<number, string> = {
   400: "Error de registro: Solicitud incorrecta",

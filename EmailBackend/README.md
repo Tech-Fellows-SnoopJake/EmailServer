@@ -29,6 +29,7 @@ cd EmailBackend
 python -m venv venv
 source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 pip install -r requirements.txt
+python manage.py makemigrations emailapp
 python manage.py migrate
 python manage.py runserver
 ```
@@ -53,3 +54,9 @@ ALLOWED_HOSTS='your_domain.com,www.your_domain.com'
 - Access http://localhost:8000/ in your browser to interact with the application.
 
 1 testing CI_back workflow
+2 checking changes in migrations
+3 I'm back!
+4 Deleting cache of migrations and DB
+5 Recreating DB db-sj.cxwawmisoa5q.us-east-2.rds.amazonaws.com
+6 Migration works
+

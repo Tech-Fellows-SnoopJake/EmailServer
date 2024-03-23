@@ -26,4 +26,13 @@ COPY . .
 
 EXPOSE 8000
 
+# Copy your entrypoint script into the image
+COPY entrypoint.sh .
+
+# Make your entrypoint script executable
+RUN chmod +x entrypoint.sh
+
+# Define your entrypoint script to be executed
+ENTRYPOINT ["./entrypoint.sh"]
+
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

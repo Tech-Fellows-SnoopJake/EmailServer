@@ -7,6 +7,18 @@ const Header: React.FC = () => {
   
     // Toggles the dropdown list
     const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+
+    //Logout function
+    const handleLogout = () => {
+  // Limpia el localStorage o las cookies, según sea necesario
+  localStorage.removeItem("id");
+  localStorage.removeItem("username");
+
+  window.location.href = "/login";
+
+  // Si estás usando un router como react-router-dom, podrías hacer:
+  // history.push('/login');
+};
   
     return (
       <header className="header flex justify-between bg-[#274073] p-6 text-[#f2f2f2]  font-poppins">
@@ -25,14 +37,14 @@ const Header: React.FC = () => {
               <ul className='list-none m-0 p-0'>
                 <li className="p-2 text-black cursor-pointer hover:bg-gray-200 ">Profile</li>
                 <li className="p-2 text-black cursor-pointer hover:bg-gray-200">Settings</li>
-                <li className="p-2 text-black cursor-pointer hover:bg-gray-200">Logout</li>
+                  <li className="p-2 text-black cursor-pointer hover:bg-gray-200" onClick={handleLogout}>Logout</li>
               </ul>
             </div>
           )}
         </div>
       </header>
     );
-  };
-  
-  export default Header;
+};
+
+export default Header;
   
