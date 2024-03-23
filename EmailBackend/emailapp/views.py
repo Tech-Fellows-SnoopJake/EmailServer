@@ -4,14 +4,16 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, viewsets
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
 from emailprototype.settings import FAKE_DOMAIN
 from .serializers import EmailSerializer, FolderSerializer, UserSerializer
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
-from django.contrib.auth.models import User
 from .models import Email, Folder, User
+from .serializers import MyTokenObtainPairSerializer
 
 
 # User C.R.U.D
@@ -32,10 +34,11 @@ class UserAPI(APIView):
         """
         Create a new user.
         """
-        existing_user = User.objects.filter(username=request.data.get('username'))
+        existing_user = User.objects.filter(
+            username=request.data.get('username'))
         # Validate that the username is not being updated to one that already exists.
         if existing_user.exists():
-             return Response({'error': 'This username is already in use.'}, status=status.HTTP_400_BAD_REQUEST)      
+            return Response({'error': 'This username is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
         try:
             serializer = UserSerializer(data=request.data)
             if serializer.is_valid():
@@ -45,10 +48,13 @@ class UserAPI(APIView):
         except IntegrityError:
             return Response({'error': 'This username is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
 
+
 class UserDetailsAPI(APIView):
     """
     API endpoint for retrieving, updating, or deleting a specific user.
     """
+    permission_classes = [IsAuthenticated]
+
     def get_object(self, pk):
         """
         Get user object by primary key.
@@ -91,50 +97,94 @@ class UserDetailsAPI(APIView):
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-class LoginAPIView(APIView):
+
+class MyTokenObtainPairView(TokenObtainPairView):
     """
-    API endpoint for user login 
+    API endpoint for user login
     """
+    serializer_class = MyTokenObtainPairSerializer
+
+
+class LogoutAPIView(APIView):
+    """
+    API endpoint for user logout
+    """
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         """
-        Authenticate user or create new user if not exists
+        Blacklist the refresh token
         """
-        try:
-            username = request.data.get('username')
-            password = request.data.get('password')
-            
-            # Validate that the username exists
-            user = User.objects.filter(username=username).first()
-            if not user:
-                # Create a new user if the username does not exist
-                user = User.objects.create(username=username.split('@')[0], password=password)
 
-                return Response({
-                    'id': user.id,
-                    'username': user.username
-                    # Add more user attributes here if needed
-                }, status=status.HTTP_201_CREATED)
-            
-            # Validate the password by comparing
-            if user.password != password:
-                return Response({'error': 'Invalid password.'}, status=status.HTTP_400_BAD_REQUEST)
-            
-            # Successful authentication, return the user object
-            return Response({
-                'id': user.id,
-                'username': user.username,
-                # Add more user attributes here if needed
-            }, status=status.HTTP_200_OK)
-        
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+# class LoginAPIView(APIView):
+#     """
+#     API endpoint for user login
+#     """
+
+#     def post(self, request):
+#         """
+#         Authenticate user or create new user if not exists
+#         """
+#         try:
+#             username = request.data.get('username')
+#             password = request.data.get('password')
+
+#             # Validate that the username exists
+#             user = User.objects.filter(username=username).first()
+#             if not user:
+#                 # Create a new user if the username does not exist
+#                 user = User.objects.create(
+#                     username=username.split('@')[0], password=password)
+
+#                 return Response({
+#                     'id': user.id,
+#                     'username': user.username
+#                     # Add more user attributes here if needed
+#                 }, status=status.HTTP_201_CREATED)
+
+#             # Validate the password by comparing
+#             if user.password != password:
+#                 return Response({'error': 'Invalid password.'}, status=status.HTTP_400_BAD_REQUEST)
+
+#             payload = {
+#                 "user_id": user.id,
+#                 "exp": datetime.datetime.now() + datetime.timedelta(minutes=1),
+#                 "iat": datetime.datetime.now()
+#             }
+#             jwt_token = jwt.encode(
+#                 payload, 'SECRET', algorithm='HS256')
+
+#             # Successful authentication, return the user object
+#             response = Response({
+#                 'id': user.id,
+#                 'username': user.username,
+#                 # Add more user attributes here if needed
+#             }, status=status.HTTP_200_OK)
+#             response.set_cookie('jwt', jwt_token, httponly=True)
+
+#             return response
+
+#         except Exception as e:
+#             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 # Email C.R.U.D
+
 class EmailAPI(APIView):
     """
     API endpoint for Email CRUD operations.
     """
-    #Method to validate that the email exists
+    permission_classes = [IsAuthenticated]
+
+    # Method to validate that the email exists
     @staticmethod
     def user_exists(username):
         """
@@ -144,7 +194,7 @@ class EmailAPI(APIView):
             return User.objects.filter(username__iexact=username).exists()
         else:
             return False
-       
+
     @method_decorator(csrf_exempt)
     def get(self, request):
         """
@@ -153,27 +203,31 @@ class EmailAPI(APIView):
         emails = Email.objects.all()
         serializer = EmailSerializer(emails, many=True)
         return Response(serializer.data)
-    
+
     def post(self, request):
         """
         Create a new email.
         """
         serializer = EmailSerializer(data=request.data)
-        receiver_val = EmailAPI.user_exists(request.data.get('receiver').lower())
+        receiver_val = EmailAPI.user_exists(
+            request.data.get('receiver').lower())
         sender_val = EmailAPI.user_exists(request.data.get('sender').lower())
-        #Validate that the email exists
-        if sender_val and receiver_val and serializer.is_valid(): 
+        # Validate that the email exists
+        if sender_val and receiver_val and serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         elif sender_val == False or receiver_val == False:
-            return Response({'error': 'This email dont exist!.'}, status=status.HTTP_400_BAD_REQUEST)        
+            return Response({'error': 'This email dont exist!.'}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+
+
 class EmailDetailsAPI(APIView):
     """
     API endpoint for retrieving, updating, or deleting a specific email.
     """
+    permission_classes = [IsAuthenticated]
+
     def get_object(self, pk):
         """
         Get email object by primary key.
@@ -211,10 +265,14 @@ class EmailDetailsAPI(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 # List of emails received per user
+
+
 class ByEmailAPIView(APIView):
     """
     API endpoint to retrieve a list of emails received per user.
     """
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, format=None, *args, **kwargs):
         """
         Retrieve a list of emails received per user.
@@ -228,10 +286,14 @@ class ByEmailAPIView(APIView):
             raise Http404
 
 # List of emails sent by user
+
+
 class BySendAPIView(APIView):
     """
     API endpoint to retrieve a list of emails sent by user..
     """
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, format=None, *args, **kwargs):
         """
         Retrieve a list of emails sent by user.
@@ -245,11 +307,15 @@ class BySendAPIView(APIView):
             raise Http404
 
 # Folders C.R.U.D  Crazy rigth?!.
+
+
 class FoldersAPIView(viewsets.ModelViewSet):
     """
     API endpoint for Folder CRUD operations.
     """
-    
+    permission_classes = [IsAuthenticated]
+
+    queryset = Folder.objects.all()
     serializer_class = FolderSerializer
     def get_queryset(self):
         """
@@ -261,4 +327,3 @@ class FoldersAPIView(viewsets.ModelViewSet):
         if user_id is not None:
             queryset = queryset.filter(user__id=user_id)
         return queryset
-    
