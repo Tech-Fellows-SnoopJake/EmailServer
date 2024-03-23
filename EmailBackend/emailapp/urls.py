@@ -12,6 +12,7 @@ urlpatterns = [
     path('mylist/<str:email>/', views.ByEmailAPIView.as_view()),  # Endpoint to filter emails by receiver
     path('sendlist/<str:email>/', views.BySendAPIView.as_view()),  # Endpoint to filter emails by sender
     path('logout/', views.LogoutAPIView.as_view()),  # Endpoint to log out a user
+    path('validate/token/', views.ValidateTokenAPI.as_view(), name='validate_token'),  # Endpoint to validate token
 ]
 
 # Define router for folders endpoint
