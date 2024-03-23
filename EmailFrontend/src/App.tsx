@@ -42,6 +42,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         
         {/* Redirect from root to either Login or Inbox based on login status */}
+        
         <Route
           path="/"
           element={

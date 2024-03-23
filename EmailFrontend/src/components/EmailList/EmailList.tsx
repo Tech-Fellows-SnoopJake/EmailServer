@@ -25,7 +25,19 @@ const EmailList = ({typeEmail}: EmailListProps) => {
                 const receiverEmail = localStorage.getItem("username");
 
                 try {
-                    const response = await axios.get(`${API_URL}/${typeList}/${receiverEmail}/`);
+                    // Get the JWT token from local storage
+                    const jwtToken = localStorage.getItem('jwtToken');
+                                    
+                    // Set up axios with Authorization header
+                    const axiosConfig = {
+                      headers: {
+                        Authorization: `Bearer ${jwtToken}`
+                      }
+                    };
+                    
+                    // Make the GET request with axios
+                    const response = await axios.get(`${API_URL}/${typeList}/${receiverEmail}/`, axiosConfig);
+
                     setEmails(Array.isArray(response.data) ? response.data : []);
                 } catch (error) {
                     //error handling
