@@ -117,6 +117,8 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
             </PopoverContent>
           </Popover>
         </form>
+        <br />
+        <p>Don't have an account? <a href="/register" className="text-white">Sign Up</a></p>
         <div className="line-bottom mt-6 border border-solid border-white"></div>
       </div>
     </div>

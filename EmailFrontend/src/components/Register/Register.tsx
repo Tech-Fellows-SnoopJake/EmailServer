@@ -12,11 +12,15 @@ const statusErrorMessages: Record<number, string> = {
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  const [password2, setPassword2] = useState('');
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
    
     try {
+      if (password !== password2) {
+        console.error('Las contraseñas no coinciden');
+        return;
+      }
       // Realizar la solicitud al servidor para registrar al usuario
       const response = await fetch(`${API_URL}/users/`, {
         method: 'POST',
@@ -51,8 +55,8 @@ const Register = () => {
   };
 
   return (
-    <div className="register-bg h-screen flex justify-center items-center bg-gradient-to-r from-[#4b61a6] from-0% via-[#4b61a6] via-50% to-[#afb7cf] to-100%">
-      <div className="register-con p-4 rounded-[18px] w-[20%] bg-[#8091F2]">
+    <div className="register-bg h-screen flex justify-center items-center bg-gradient-to-r from-[#4b61a6] from-0% via-[#4b61a6] via-50% to-[#afb7cf] to-100%" style={{overflowY: 'scroll'}}>
+      <div className="register-con p-4 rounded-[18px] w-[350px] bg-[#8091F2]">
         <h1 className="text-center mb-4 text-[#274073] text-2xl">Create an account</h1>
         <div className="line-top mb-6 border border-solid border-white"></div>
         <form className="register-form flex flex-col gap-4" onSubmit={handleRegister}>
@@ -61,6 +65,7 @@ const Register = () => {
             label="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            isRequired
           />
           <h2>Password</h2>
           <Input
@@ -68,9 +73,21 @@ const Register = () => {
             label="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            isRequired
           />
-          <Button color="default" onClick={handleRegister}>Create account</Button>
+          <h2>Confirm password</h2>
+          <Input
+            type="password"
+            label="Password2"
+            value={password2}
+            onChange={(e) => setPassword2(e.target.value)}
+            isRequired
+            errorMessage={password !== password2 ? 'Passwords do not match': ''}
+          />
+          <Button color="default" onClick={handleRegister} isDisabled={password !== password2}>Create account</Button>
         </form>
+        <br />
+        <p>Already have an account? <a href="/login" className="text-white">Login</a></p>
         <div className="line-bottom mt-6 border border-solid border-white"></div>
       </div>
     </div>

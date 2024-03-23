@@ -37,9 +37,15 @@ To run the `Vite` live development server, please run the dev script with:
 npm run dev
 ```
 
-
 ## G0 Feature change:
 
-- adding const to easy change of IP. We had problems with the use of environment vars, so is discarded for now.
-- return to previous version 
+- Adding const to easy change of IP. We had problems with the use of environment vars, so is discarded for now.
+- Button of logout works.
+- Login with password works and implemented
+- Front-end route protection, to restrict users from navigating without being logged in.
+- Implemented register feature in front. 
+### TODO
+- Update code with a unique standard of retrieve data (fetch or axios) and review best practices for writing code and organizing files and folders.
+- Improve de UI/UX and apply responsive practices. 
+
 
