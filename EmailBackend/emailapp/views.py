@@ -34,22 +34,20 @@ class UserAPI(APIView):
         """
         Create a new user.
         """
+        existing_user = User.objects.filter(
+            username=request.data.get('username'))
+        # Validate that the username is not being updated to one that already exists.
+        if existing_user.exists():
+            return Response({'error': 'This username is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
         try:
-            existing_user = User.objects.filter(
-                username=request.data.get('username'))
-            # Validate that the username is not being updated to one that already exists.
-            if existing_user.exists():
-                return Response({'error': 'This username is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
-            try:
-                serializer = UserSerializer(data=request.data)
-                if serializer.is_valid():
-                    serializer.save()
-                    return Response(serializer.data, status=status.HTTP_201_CREATED)
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-            except IntegrityError:
-                return Response({'error': 'This username is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
-        except Exception as e:
-            print(e)
+            serializer = UserSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except IntegrityError:
+            return Response({'error': 'This username is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
+
 
 class UserDetailsAPI(APIView):
     """
