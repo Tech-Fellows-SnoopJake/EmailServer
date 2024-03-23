@@ -53,7 +53,6 @@ ALLOWED_HOSTS='your_domain.com,www.your_domain.com'
 
 - Access http://localhost:8000/ in your browser to interact with the application.
 
-<<<<<<< Updated upstream
 # Changes by HG 00
 
 - Implementation of JWT for user login and session management as well as to protect the transfer of information.
@@ -81,5 +80,3 @@ Otherwise, a first `python manage.py makemigrations emailapp` and `python manage
 Postman APIs of the project with Json formats. Tests are not applied but could be a good option from
 [Postman](https://www.postman.com/valwolfor/workspace/jake-email/request/23052922-895a334c-342e-4519-bbc9-0ff67e8a2ee5).
 
-=======
->>>>>>> Stashed changes
