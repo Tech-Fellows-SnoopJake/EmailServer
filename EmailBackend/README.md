@@ -54,3 +54,4 @@ ALLOWED_HOSTS='your_domain.com,www.your_domain.com'
 - Access http://localhost:8000/ in your browser to interact with the application.
 
 1 testing CI_back workflow
+1
