@@ -40,5 +40,6 @@ npm run dev
 
 ## G0 Feature change:
 
-- adding const to easy change of IP. We had problems with the use of environment vars, so is discarded for now. 
-- Logout works in a simple way. 
+- adding const to easy change of IP. We had problems with the use of environment vars, so is discarded for now.
+- return to previous version 
+
