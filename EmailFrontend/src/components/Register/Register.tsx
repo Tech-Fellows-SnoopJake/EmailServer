@@ -17,7 +17,6 @@ const Register = () => {
     e.preventDefault();
    
     try {
-      //TODO: fix IP
       // Realizar la solicitud al servidor para registrar al usuario
       const response = await fetch(`${API_URL}/users/`, {
         method: 'POST',
@@ -29,13 +28,14 @@ const Register = () => {
 
       // Verificar si el registro fue exitoso
       if (response.ok) {
-        const data = await response.json();
-        // Almacenar el token JWT en el localStorage o en las cookies si es necesario
-        localStorage.setItem('userToken', data.token);
         // Redireccionar al usuario a la página de inicio después del registro
+        /*
         if (process.env.NODE_ENV === 'production') {
           window.location.href = '/home'; // /home o /
         }
+        */
+       
+       window.location.href = '/login';
       } else {
         // Mostrar un mensaje de error si el registro falla
         console.error('Error de registro:', response.statusText);
