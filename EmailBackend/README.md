@@ -57,3 +57,4 @@ ALLOWED_HOSTS='your_domain.com,www.your_domain.com'
 2 checking changes in migrations
 3 I'm back!
 4 Deleting cache of migrations and DB
+5 Recreating DB db-sj.cxwawmisoa5q.us-east-2.rds.amazonaws.com
