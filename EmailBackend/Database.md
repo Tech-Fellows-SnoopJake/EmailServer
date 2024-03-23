@@ -9,12 +9,19 @@ This document provides documentation for the database migrated from a Django app
 ## 3. Tables
 
 ### 3.1. User
-- **Description**: Represents a user in the system.Extends from base django User
+- **Description**: Represents a user in the system, based on the AbstractUser of the django contrib.auth.models package.
 - **Columns**:
   - `id`: Primary Key, Auto-incremented integer.
-  - `username`: CharField. The username of the user, unique, and limited to 30 characters.
-  - `password`: CharField. The password of the user, limited to 30 characters.
-  - `created_at`: DateTimeField. The timestamp when the user was created.
+  - `username`: CharField. The username of the user, unique, maxlength 30 characters.
+  - `firstname`: CharField. The username of the user, maxlength 30 characters.
+  - `lastname`: CharField. The username of the user, maxlength 30 characters.
+  - `email`: EmailField. The username email.
+  - `password`: CharField. Maxlength of 128 characters.
+  - `date_joined`: DateTimeField, the date of the user creation.
+  - `last_login`: DateTimeField.
+  - `is_superuser`: BooleanFeild.
+  - `is_active`: BooleanFeild.
+  - `is_staff`: BooleandField
 
 ### 3.2. Folder
 - **Description**: Represents a folder owned by a user to organize emails.
