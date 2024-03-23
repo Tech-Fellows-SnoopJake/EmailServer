@@ -16,7 +16,7 @@ interface LoginProps {
 //TODO: fix and adapt when register ok.
 const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("brHTAITnNdYmIyJ")
+  const [password, setPassword] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
 
   const validateEmail = (email: string): boolean => {
@@ -50,8 +50,8 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
       if (response.ok) {
         const data = await response.json()
         // Almacenar el token JWT en el localStorage o en las cookies
-        localStorage.setItem("id", data.id)
-        localStorage.setItem("username", data.username)
+        localStorage.setItem("jwtToken", data.access)
+        localStorage.setItem("refreshToken", data.refresh)
         // Redireccionar al usuario a la página de inicio, por ejemplo
         onLoginSuccess()
       } else {
@@ -83,10 +83,9 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
             value={username}
             onChange={(e) => {
               setUsername(e.target.value)
-              setPassword(password)
             }}
           />
-          <Input label="password"  value={"brHTAITnNdYmIyJ"} className="hidden"/>
+          <Input type="password" label="password"  value={password} onChange={(e) => {setPassword(e.target.value)}}/>
           <Popover placement="right">
             <PopoverTrigger>
               <Button color="default" onClick={handleLogin}>

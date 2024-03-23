@@ -16,7 +16,7 @@ import { useState } from "react"
 
 const handleLoginSuccess = () => {
   // Esta función se llamará cuando el inicio de sesión sea exitoso
-  localStorage.setItem("isLoggedIn", "true")
+  // localStorage.setItem("isLoggedIn", "true")
 
   // Redireccionar al usuario a la bandeja de entrada
   window.location.href = "/inbox"
@@ -29,7 +29,7 @@ function App() {
   // Assuming you have a way to check if the user is logged in
   const isLoggedIn = () => {
     // Check if there are any jwt tokens in local storage
-    return !!localStorage.getItem("userToken")
+    return !!localStorage.getItem("jwtToken")
   }
 
   return (
