@@ -56,3 +56,4 @@ ALLOWED_HOSTS='your_domain.com,www.your_domain.com'
 1 testing CI_back workflow
 2 checking changes in migrations
 3 I'm back!
+4 Deleting cache of migrations and DB
