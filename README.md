@@ -1,6 +1,6 @@
 # SnoopJake Email MONOREPO
 
----
+--- 
 
 <p align="center">
 <img src="https://github.com/Tech-Fellows-SnoopJake/EmailServer/assets/49454068/b2438f2d-fa21-405e-94ed-c5e25c4140ea"  width="300" height="300" />
