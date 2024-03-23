@@ -22,11 +22,11 @@ Cheers!
 
 [README Back](../EmailServer/EmailBackend/README.md)
 
-[REAME Front](../EmailServer/EmailFrontend/README.md)
+[README Front](../EmailServer/EmailFrontend/README.md)
 
-## PR **HG 02 Improvements**
+## PR **HG 0 Improvements**
 
 After inheriting and thoroughly reviewing the code for this project, we've made some updates that can be reviewed in the 
-PR. We've cleaned up the code, made it easier to read and work with, improve security, and polished the user interface for 
+PR (HG0 Improvements  --> HG5). We've cleaned up the code, made it easier to read and work with, improve security, and polished the user interface for 
 a smoother experience.
 
