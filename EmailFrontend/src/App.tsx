@@ -12,7 +12,8 @@ import EmailDetail from "./components/EmailDetail/EmailDetail"
 import ComposeEmail from "./components/ComposeEmail/ComposeEmail"
 import Login from "./components/Login/Login"
 import Register from "./components/Register/Register"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { API_URL } from "./utils/constants"
 
 const handleLoginSuccess = () => {
   // Esta función se llamará cuando el inicio de sesión sea exitoso
@@ -24,40 +25,63 @@ const handleLoginSuccess = () => {
 }
 
 function App() {
-  const [listType, setListType] = useState("inbox") 
+  const [listType, setListType] = useState("inbox")
 
-  // Assuming you have a way to check if the user is logged in
-  const isLoggedIn = () => {
-    // Check if there are any jwt tokens in local storage
-    return !!localStorage.getItem("jwtToken")
+  const validateToken = async () => {
+    const token = localStorage.getItem("jwtToken")
+    if (token) {
+      try {
+        const response = await fetch(`${API_URL}/validate/token`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        if (!response.ok) {
+          localStorage.removeItem("jwtToken")
+          localStorage.removeItem("refreshToken")
+          localStorage.removeItem("id")
+          localStorage.removeItem("username")
+        }
+      } catch (error) {
+          localStorage.removeItem("jwtToken")
+          localStorage.removeItem("refreshToken")
+          localStorage.removeItem("id")
+          localStorage.removeItem("username")
+      }
+    }
   }
+  const isLoggedIn = !!localStorage.getItem("jwtToken")
+
+  useEffect(() => { 
+    validateToken()
+  }, [])
 
   return (
     <Router>
       <Routes>
         <Route
           path="/login"
-          element={<Login onLoginSuccess={handleLoginSuccess} />}
+          element={!isLoggedIn ? <Login onLoginSuccess={handleLoginSuccess} /> : <Navigate to="/inbox" />}
         />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={!isLoggedIn ? <Register /> : <Navigate to="/inbox" />} />
         
         {/* Redirect from root to either Login or Inbox based on login status */}
         
         <Route
           path="/"
           element={
-            isLoggedIn() ? <Navigate to="/inbox" /> : <Navigate to="/login" />
+            isLoggedIn ? <Navigate to="/inbox" /> : <Navigate to="/login" />
           }
         />
 
         {/* Layout route for authenticated users */}
 
         <Route path="/" element={<Layout setListType={setListType}/>}>
-          <Route path="inbox" element={<EmailList typeEmail={listType} />} />
-          <Route path="sent" element={<EmailList typeEmail={listType} />} />
-
-          <Route path="email/:id" element={<EmailDetail />} />
-          <Route path="compose" element={<ComposeEmail />} />
+          <Route path="inbox" element={isLoggedIn ? <EmailList typeEmail={listType} />: <Navigate to="/login" />} />
+          <Route path="sent" element={isLoggedIn ? <EmailList typeEmail={listType} />: <Navigate to="/login" />} />
+          <Route path="email/:id" element={isLoggedIn ? <EmailDetail />: <Navigate to="/login" />} />
+          <Route path="compose" element={isLoggedIn ? <ComposeEmail /> : <Navigate to="/login" />} />
         </Route>
       </Routes>
     </Router>
