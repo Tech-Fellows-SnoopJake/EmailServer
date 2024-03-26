@@ -20,12 +20,11 @@ jobs:
       ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
     steps:
       - uses: actions/checkout@v4
-      
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'      
-      
+          
       - name: Install dependencies
         run: |
           cd backend
@@ -63,7 +62,6 @@ jobs:
     steps:
       - name: Pull Docker image
         run: docker pull ${{ secrets.DOCKER_USERNAME }}/django-ci-cd-pipeline:latest
-      
       - name: Apply Django migrations
         run: |
           docker run --rm \
@@ -77,10 +75,8 @@ jobs:
           -e ALLOWED_HOSTS="${{ secrets.ALLOWED_HOSTS }}" \
           ${{ secrets.DOCKER_USERNAME }}/django-ci-cd-pipeline:latest \
           python manage.py migrate
-      
       - name: Delete Old Container
         run: docker rm -f backendContainer
-      
       - name: Run Docker container
         run: |
           docker run -d -p 8000:8000 --name backendContainer \
